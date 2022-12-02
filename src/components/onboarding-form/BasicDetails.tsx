@@ -7,7 +7,7 @@ import Button from "@components/Button";
 import { useAppStore } from "@store/app";
 import { Dispatch, SetStateAction } from "react";
 
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { useState } from "react";
 import uploadToArweave from "@utils/uploadToArweave";
 import onError from "@utils/onError";
@@ -229,10 +229,12 @@ const BasicDetails = ({
       /> */}
       <div className="m-auto pt-3">
         <Button
+          disabled={isLoading}
           type="submit"
           variant="primary"
           className="mx-auto mt-3 max-w-xs"
         >
+          {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
           continue
         </Button>
         {txHash ? <IndexStatus txHash={txHash} /> : null}

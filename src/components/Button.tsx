@@ -18,7 +18,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Input(
   const { variant, children, className, icon, ...rest } = props;
   return (
     <button
-      className={clsx("btn bg-primary hover:bg-primary border-1", variant && `btn-${variant}`, className)}
+      className={clsx(
+        "btn bg-primary hover:bg-primary border-1",
+        variant && `btn-${variant}`,
+        className
+      )}
       ref={ref}
       {...rest}
     >

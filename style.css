@@ -37,14 +37,97 @@ html {
   background-size: 86.125rem;
 }
 
-.bg-onboard-overlay {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'><path d='M0 .5H31.5V32'/></svg>");
-}
-
 [data-theme="light"] input {
   @apply ring-1 !bg-slate-900 text-white;
 }
 
-.input-disabled, .input[disabled] {
+.input-disabled,
+.input[disabled] {
   @apply ring-1 bg-slate-900 text-white border-[hsl(var(--bc)_/_var(--tw-border-opacity))];
+}
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+:root {
+  --card-height: 65vh;
+  --card-width: calc(var(--card-height) / 1.5);
+}
+
+.magic-card {
+  @apply w-1/2;
+  padding: 2px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.magic-card:hover {
+  color: rgb(88 199 250 / 100%);
+  transition: color 1s;
+}
+.magic-card:hover:before,
+.magic-card:hover:after {
+  animation: none;
+  opacity: 0;
+}
+
+.magic-card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: var(--rounded-box, 1rem);
+  background-image: linear-gradient(
+    var(--rotate),
+    #5ddcff,
+    #3c67e3 43%,
+    #4e00c2
+  );
+  position: absolute;
+  animation: spin 2.5s linear infinite;
+}
+
+.magic-card::after {
+  position: absolute;
+  content: "";
+  top: calc(var(--card-height) / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(var(--card-height) / 6));
+  background-image: linear-gradient(
+    var(--rotate),
+    #5ddcff,
+    #3c67e3 43%,
+    #4e00c2
+  );
+  opacity: 1;
+  transition: opacity 0.5s;
+  animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+.btn-disabled,
+.btn-disabled:hover,
+.btn[disabled],
+.btn[disabled]:hover {
+  background-color: hsl(var(--n) / var(--tw-bg-opacity));
+  color: gray;
+  --tw-bg-opacity: 1;
 }

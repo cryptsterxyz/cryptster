@@ -19,7 +19,7 @@ import {
   useCreatePostViaDispatcherMutation,
   ReferenceModules,
 } from "../../../generated";
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { RELAY_ON, SIGN_WALLET, TESTNET_LENSHUB_PROXY } from "@utils/constants";
 import { usePublicationStore } from "@store/publication";
 import trimify from "@utils/trimify";
@@ -33,11 +33,17 @@ import onError from "@utils/onError";
 import { useTransactionPersistStore } from "@store/transaction";
 import { useReferenceModuleStore } from "@store/reference-module";
 
-export type tier = { amount: number; comment: string; emoji: string };
+export type tier = {
+  isLoading?: boolean;
+  amount: number;
+  comment: string;
+  emoji: string;
+};
 
 const Tier = ({
   index,
   field,
+  isLoading = false,
   fieldsData,
   onClick,
   activeTier,
@@ -112,11 +118,12 @@ const Tier = ({
                 {...form.register(`emoji`)}
               />
               <Button
+                disabled={isLoading}
                 type="submit"
                 variant="primary"
                 className="mx-auto mt-3 max-w-xs"
               >
-                add more
+                {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add more
               </Button>
             </Card>
           </AppearAnimation>
@@ -418,6 +425,7 @@ const TierForm = ({
         className=""
         stages={fields.map((field, index) => (
           <Tier
+            isLoading={isLoading}
             activeTier={activeTier}
             key={`tier-${index}`}
             index={index}
