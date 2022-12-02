@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html data-theme="light">
       <Head />
-      <body>
+      <body className="font-space-grotesek">
         <Main />
         <NextScript />
       </body>
