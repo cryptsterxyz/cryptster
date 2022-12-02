@@ -25,11 +25,7 @@ import {
   useCreateSetProfileMetadataViaDispatcherMutation,
 } from "../../../generated";
 import getSignature from "@utils/getSignature";
-import {
-  LENS_PERIPHERY,
-  RELAY_ON,
-  SIGN_WALLET,
-} from "@utils/constants";
+import { LENS_PERIPHERY, RELAY_ON, SIGN_WALLET } from "@utils/constants";
 
 import { splitSignature } from "ethers/lib/utils.js";
 import IndexStatus from "@components/shared/IndexStatus";
@@ -162,7 +158,10 @@ const BasicDetails = ({
       cover_picture: null,
 
       // cover_picture: cover ? cover : null,
-      attributes: [{ traitType: "string", key: "app", value: "cryptster" }],
+      attributes: [
+        { traitType: "string", key: "app_name", value: "cryptster" },
+        { traitType: "string", key: "steps", value: "0" },
+      ],
       version: "1.0.0",
       metadata_id: Math.random(),
       createdOn: new Date(),
@@ -210,7 +209,12 @@ const BasicDetails = ({
         editProfile(name, bio);
       }}
     >
-      <Input type={""} label="Name" placeholder="Name" {...form.register("name")} />
+      <Input
+        type={""}
+        label="Name"
+        placeholder="Name"
+        {...form.register("name")}
+      />
       <Input
         label="Your custom page URL"
         placeholder="cryptster/strek.lens"

@@ -350,6 +350,11 @@ const TierForm = ({
         displayType: "string",
         value: amount,
       },
+      {
+        traitType: "steps",
+        displayType: "string",
+        value: activeTier,
+      },
     ];
 
     const id = await uploadToArweave({

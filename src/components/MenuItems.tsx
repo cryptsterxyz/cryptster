@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import OnBoard from "pages/onboard";
 import { FC, useEffect } from "react";
 import { useAppStore } from "../store/app";
 
@@ -16,7 +15,7 @@ const MenuItems: FC = () => {
   const currentProfile = useAppStore((state) => state.currentProfile);
   const router = useRouter();
   useEffect(() => {
-    // if (currentProfile?.handle) router.push("/onboard");
+    if (currentProfile?.handle) router.push("/onboard");
   }, [currentProfile?.handle]);
 
   if (!currentProfile) {
