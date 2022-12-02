@@ -160,7 +160,7 @@ const BasicDetails = ({
       // cover_picture: cover ? cover : null,
       attributes: [
         { traitType: "string", key: "app_name", value: "cryptster" },
-        { traitType: "string", key: "steps", value: "0" },
+        { traitType: "string", key: "cryptster_basic_details", value: "true" },
       ],
       version: "1.0.0",
       metadata_id: Math.random(),

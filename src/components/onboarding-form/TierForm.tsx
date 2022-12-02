@@ -351,9 +351,9 @@ const TierForm = ({
         value: amount,
       },
       {
-        traitType: "steps",
+        traitType: "is_cryptster_tier",
         displayType: "string",
-        value: activeTier,
+        value: activeTier.toString(),
       },
     ];
 
