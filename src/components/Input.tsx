@@ -21,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       </label>
       <input
         placeholder={placeholder}
-        className="input input-bordered w-full max-w-md"
+        className="input w-full max-w-md"
         ref={ref}
         {...rest}
         type={type}

@@ -86,9 +86,9 @@ const Tier = ({
           onSubmit={(formData) => {
             onClick(formData);
           }}
-          className="w-full items-center justify-between"
+          className="items-center justify-between wm-2 z-10 my-auto xl:mt-18 w-full card border-theme  shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/500 flex"
         >
-          <AppearAnimation className="flex-grow rounded-2xl  ring-1 ring-slate-900/5">
+          <AppearAnimation className="flex-grow rounded-2xl  ring-1 ring-slate-900/5 w-full">
             <Card className="p-3 pt-6">
               <Input
                 type="number"
