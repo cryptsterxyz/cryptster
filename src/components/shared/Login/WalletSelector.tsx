@@ -122,7 +122,7 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
               <Spinner className="mr-2" size="xs" />
             ) : (
               <img
-                className="mr-2 w-4 h-4 mr-2"
+                className="mr-2 w-4 h-4"
                 height={16}
                 width={16}
                 src="/lens.png"
