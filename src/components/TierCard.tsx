@@ -21,11 +21,24 @@ const TierCard = ({
   const [currentTier, setCurrentTier] = useState(activeTier);
 
   return (
-    <Card className=" m-2 z-10 bg-transparent border border-theme py-5 my-auto xl:mt-18 w-full lg:w-2/5">
+    <Card
+      className={clsx(
+        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 text-white
+        card border-theme  shadow-lg shadow-slate-900/5 ring-1 bg-gray-900/50 ring-slate-900/500 flex flex-col justify-center items-center
+        `,
+        {
+          //  "bg-slate-900 text-white ring-1 ring-blue-800": viewOnly ,
+           "border border-theme ": !viewOnly 
+
+      }
+      )}
+    >
       <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl ">
         Gift {handle} some crypto
       </h2>
-      <p className="h-auto min-h-12 py-2 flex-grow-0">{tiers[currentTier].comment}</p>
+      <p className="h-auto min-h-12 py-2 flex-grow-0">
+        {tiers[currentTier].comment}
+      </p>
       <Card className="rounded-md border border-theme w-full flex items-center bg-theme">
         <div className="flex justify-center items-center">
           <div className="text-[50px]">{tiers[currentTier].emoji}</div>

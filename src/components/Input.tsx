@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className="form-control w-full max-w-md mx-auto">
       <label className="label">
-        <span className="label-text">{label}</span>
+        <span className="label-text text-white">{label}</span>
       </label>
       <input
         placeholder={placeholder}
