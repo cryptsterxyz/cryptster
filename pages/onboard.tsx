@@ -14,7 +14,7 @@ function OnBoard() {
       <div className="flex justify-center items-center flex-col flex-grow bg-onboard-overlay">
         {steps === 0 && (
           <Card className="ring-1 bg-gray-900/50  ring-slate-900/500 flex flex-col justify-center items-center w-1/2">
-            <AppearAnimation className="flex flex-col justify-center items-center">
+            <AppearAnimation className="flex flex-col justify-center items-center  flex-wrap sm:flex-nowrap">
               <Avatar size={12} src="/cryptster.svg" />
               <BasicDetails onComplete={setSteps} />
             </AppearAnimation>

@@ -23,11 +23,11 @@ const TierCard = ({
   return (
     <Card
       className={clsx(
-        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 text-white
-        card border-theme  shadow-lg shadow-slate-900/5 ring-1 bg-gray-900/50 ring-slate-900/500 flex flex-col justify-center items-center
+        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 
+        card border-theme  shadow-lg shadow-slate-900/5 ring-1  ring-slate-900/500 flex flex-col justify-center items-center
         `,
         {
-          //  "bg-slate-900 text-white ring-1 ring-blue-800": viewOnly ,
+           "bg-slate-900 text-white bg-gray-900/50": viewOnly ,
            "border border-theme ": !viewOnly 
 
       }
@@ -42,9 +42,9 @@ const TierCard = ({
       <Card className="rounded-md border border-theme w-full flex items-center bg-theme">
         <div className="flex justify-center items-center">
           <div className="text-[50px]">{tiers[currentTier].emoji}</div>
-          <p className="ml-3 text-theme">
+          <div className="ml-3 text-theme">
             <XIcon className="w-7 h-7 outline-1 dark:text-white text-theme" />
-          </p>
+          </div>
           <div className="flex flex-wrap">
             {tiers.map(({ amount }, _index) => (
               <button

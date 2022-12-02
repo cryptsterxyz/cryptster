@@ -11,7 +11,7 @@ const Card = ({
     <div
       className={clsx("card border-theme  shadow-lg shadow-slate-900/5", className)}
     >
-      <div className="card-body p-2 sm:p-8">{children}</div>
+      <div className="card-body p-2 sm:p-8 w-full">{children}</div>
     </div>
   );
 };
