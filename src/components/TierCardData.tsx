@@ -90,6 +90,7 @@ const TierCardData: FC<Props> = ({
       publications={data?.publications.items}
       setParty={setParty}
       party={party}
+      profile={profile}
       viewOnly={false}
     />
   ) : (

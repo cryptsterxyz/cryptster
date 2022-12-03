@@ -2,6 +2,7 @@ import Button from "@components/Button";
 import Card from "@components/Card";
 import CoverPicture from "@components/CoverPicture";
 import Editor from "@components/Editor";
+import getAvatar from "src/lib/getAvatar";
 import withEditorContext from "@components/Editor/withLexicalContext";
 import PageLoader from "@components/PageLoader";
 import ProfilePicture from "@components/ProfilePicture";
@@ -84,7 +85,16 @@ const Profile = () => {
       <div className="relative sm:min-h-[300px]">
         <CoverPicture />
         <div className="absolute -bottom-8 left-2/4 -translate-x-[50px] z-10">
-          <ProfilePicture />
+          {/* <ProfilePicture /> */}
+          <div className="h-[142px] w-[142px] bg-white rounded-full flex justify-center items-center">
+            <div className="max-h-[132px] max-w-[132px] rounded-full overflow-hidden">
+              <img
+                src={getAvatar(profile)}
+                loading="lazy"
+                alt={profile.handle}
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="mx-auto text-center">

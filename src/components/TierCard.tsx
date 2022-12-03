@@ -37,6 +37,7 @@ interface TierProps {
   activeTier?: number;
   viewOnly?: boolean;
   publications?: any;
+  profile?: any;
   party?: boolean;
   setParty?: any;
 }
@@ -51,6 +52,7 @@ const TierCard = ({
   tiers,
   publications,
   setParty,
+  profile,
   party = false,
   viewOnly = true,
 }: TierProps) => {
@@ -226,7 +228,7 @@ const TierCard = ({
       )}
     >
       <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl text-center">
-        Collect tier to support {currentProfile.handle} in{" "}
+        Collect tier to support {profile?.handle} in{" "}
         {tiers[currentTier]?.currency}
       </h2>
       <p className="h-auto min-h-12 py-2 flex-grow-0">
