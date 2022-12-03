@@ -17,12 +17,16 @@ import EmojisPlugin from "./EmojisPlugin";
 import EmojiPickerPlugin from "./EmojiPickerPlugin";
 import ToolbarPlugin from "./ToolbarPlugin";
 import clsx from "clsx";
+import React from "react";
 
 const TRANSFORMERS = [...TEXT_FORMAT_TRANSFORMERS];
 
 const Editor = (
   props: JSX.IntrinsicAttributes &
-    HTMLAttributes<HTMLDivElement> & { viewOnly?: boolean }
+    HTMLAttributes<HTMLDivElement> & {
+      viewOnly?: boolean;
+      hidePlaceholder?: boolean;
+    }
 ): JSX.Element => {
   // const setPublicationContent = usePublicationStore((state) => state.setPublicationContent);
   const { viewOnly } = props;
@@ -35,7 +39,9 @@ const Editor = (
           <ContentEditable className="px-5 block my-4 min-h-[65px] h-4/5 overflow-auto" />
         }
         placeholder={
-          !viewOnly ? (
+          props?.hidePlaceholder ? (
+            <React.Fragment />
+          ) : !viewOnly ? (
             <div className="px-5 absolute top-[65px] text-gray-400 pointer-events-none whitespace-nowrap">
               What's happening?
             </div>

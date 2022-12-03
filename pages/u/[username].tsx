@@ -81,7 +81,16 @@ const Profile = () => {
       <div className="border-b border-b-theme mt-5"></div>
       <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
         <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 border border-theme-user">
-          <Editor viewOnly className="min-h-[300px]" />
+          <Editor
+            viewOnly
+            content="I love open source 💗
+I got into open source in 2012. Two years later, I quit my office job to work on open source full-time while living off savings. I have been doing that for more than 6 years now. Since 2018, my open source work has been funded by the awesome community.
+If you or your company use any of my projects or like what I’m doing, please consider backing me so I can continue maintaining and evolving all my projects and new ones. I'm in this for the long run.
+I actively maintain 1100+ npm packages (2 billion downloads a month) and many popular projects. You're probably depending on some of my packages in your dependency tree. For example, Webpack (proof) and Babel (proof) rely on 100+ of my packages. Many large companies also rely on my packages.
+You can read more about me in this interview and my AMA.
+Thank you for your support! 🙌"
+            className="min-h-[300px]"
+          />
         </Card>
         <TierCardData profile={profile} />
         {/* <TierCard handle="strek.lens" tiers={fields} viewOnly={false} /> */}

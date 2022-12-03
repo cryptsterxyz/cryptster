@@ -181,41 +181,13 @@ function OnBoard() {
     <div className="flex flex-grow  bg-onboard">
       <div className="flex justify-center items-center flex-col flex-grow bg-onboard-overlay">
         {steps === 0 && (
-          <div className="magic-card">
+          <div className="magic-card !w-[70vw]">
             <Card className="ring-1 bg-gray-900  ring-slate-900/500 flex flex-col justify-center items-center onboard w-full h-full">
-              <AppearAnimation className="flex flex-col justify-center items-center  flex-wrap sm:flex-nowrap">
-                <Avatar size={12} src="/cryptster.svg" />
-                <BasicDetails onComplete={setSteps} />
-              </AppearAnimation>
+              <BasicDetails onComplete={setSteps} />
             </Card>
           </div>
         )}
         {steps === 1 && (
-          <div className="magic-card w-[50vw]">
-            <Card className="ring-1 bg-gray-900  ring-slate-900/500 flex flex-col justify-center items-center onboard w-[50vw] h-full">
-              <h2 className="text-white">Let People know what you do</h2>
-              <Editor
-                viewOnly
-                className=" lexical-about h-[500px]"
-                onChange={(e) => setAboutContent(e)}
-              />
-              <Button
-                onClick={() => {
-                  editProfile(aboutContent);
-                  setSteps(2);
-                }}
-                disabled={isLoading}
-                type="submit"
-                variant="primary"
-                className="mx-auto mt-3 max-w-xs"
-              >
-                {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
-                continue
-              </Button>
-            </Card>
-          </div>
-        )}
-        {steps === 2 && (
           <AppearAnimation className="flex flex-col justify-center items-center w-4/5">
             <TierForm onComplete={setSteps} />
           </AppearAnimation>

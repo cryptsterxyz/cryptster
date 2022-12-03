@@ -114,7 +114,7 @@ const Tier = ({
           <AppearAnimation className="flex-grow rounded-2xl  ring-1 ring-slate-900/5 w-full">
             <div className="magic-card !w-full">
               <Card className=" bg-gray-900 w-full">
-                <div>
+                <div className="form-control w-full max-w-md mx-auto">
                   <label className="label">
                     <span className="label-text text-white">Currency</span>
                   </label>

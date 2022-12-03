@@ -31,6 +31,9 @@ import { splitSignature } from "ethers/lib/utils.js";
 import IndexStatus from "@components/shared/IndexStatus";
 import Editor from "@components/Editor";
 import withEditorContext from "@components/Editor/withLexicalContext";
+import AppearAnimation from "@components/AnimatedAppear";
+import { Avatar } from "@components/Avatar";
+import Bio from "@components/Bio";
 // const schema = z.object({
 //   name: z.string().min(1, { message: "Required" }),
 //   age: z.number().min(10),
@@ -47,6 +50,7 @@ const BasicDetails = ({
 }: {
   onComplete: Dispatch<SetStateAction<number>>;
 }) => {
+  const [editorContent, setEditorContent] = useState("");
   const currentProfile = useAppStore((state) => state.currentProfile);
   const userSigNonce = useAppStore((state) => state.userSigNonce);
   const setUserSigNonce = useAppStore((state) => state.setUserSigNonce);
@@ -163,6 +167,7 @@ const BasicDetails = ({
       attributes: [
         { traitType: "string", key: "app_name", value: "cryptster" },
         { traitType: "string", key: "cryptster_basic_details", value: "true" },
+        { traitType: "string", key: "about", value: editorContent },
       ],
       version: "1.0.0",
       metadata_id: Math.random(),
@@ -202,45 +207,62 @@ const BasicDetails = ({
       dispatcherData?.createSetProfileMetadataViaDispatcher.txHash);
 
   return (
-    <Form
-      form={form}
-      className="w-full items-center flex flex-col"
-      onSubmit={({ name, bio }) => {
-        // console.log("dsdfsdf");
-        editProfile(name, bio);
-      }}
-    >
-      <Input
-        type={""}
-        label="Name"
-        placeholder="Name"
-        {...form.register("name")}
-      />
-      <Input
-        label="Your custom page URL"
-        placeholder="cryptster/strek.lens"
-        disabled
-        {...form.register("handle")}
-      />
-      <Input label="Bio" placeholder="Bio" {...form.register("bio")} />
-      {/* <Input
-        label="Website or social link"
-        placeholder="Website or social link"
-        {...form.register("")}
-      /> */}
-      <div className="m-auto pt-3">
-        <Button
-          disabled={isLoading}
-          type="submit"
-          variant="primary"
-          className="mx-auto mt-3 max-w-xs"
-        >
-          {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
-          continue
-        </Button>
-        {txHash ? <IndexStatus txHash={txHash} /> : null}
+    <AppearAnimation className="flex flex-col justify-center items-center  flex-wrap sm:flex-nowrap">
+      <div className="flex w-full">
+        <div className="w-1/2">
+          <Form
+            form={form}
+            className="w-full items-center flex flex-col"
+            onSubmit={({ name, bio }) => {
+              // console.log("dsdfsdf");
+              editProfile(name, bio);
+            }}
+          >
+            <Avatar size={12} src="/cryptster.svg" />
+
+            <Input
+              type={""}
+              label="Name"
+              placeholder="Name"
+              {...form.register("name")}
+            />
+            <Input
+              label="Your custom page URL"
+              placeholder="cryptster/strek.lens"
+              disabled
+              {...form.register("handle")}
+            />
+            <div className="w-[80%] mt-2">
+              <label className="label">
+                <span className="label-text text-white">short bio</span>
+              </label>{" "}
+              <Bio setEditorContent={setEditorContent} form={form} />
+            </div>
+            <div className="m-auto pt-3">
+              <Button
+                disabled={isLoading}
+                type="submit"
+                variant="primary"
+                className="mx-auto mt-3 max-w-xs"
+              >
+                {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
+                continue
+              </Button>
+              {txHash ? <IndexStatus txHash={txHash} /> : null}
+            </div>
+          </Form>
+        </div>
+
+        <div className="w-1/2 ring-1 rounded-md p-8 ml-4">
+          <h2 className="text-white">Let People know what you do</h2>
+          <Editor
+            viewOnly
+            className=" lexical-about h-[500px]"
+            onChange={(e) => setEditorContent(e)}
+          />
+        </div>
       </div>
-    </Form>
+    </AppearAnimation>
   );
 };
 
