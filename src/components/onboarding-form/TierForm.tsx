@@ -41,6 +41,7 @@ export type tier = {
   isLoading?: boolean;
   amount: number;
   comment: string;
+  currency: string;
   emoji: string;
 };
 
@@ -79,7 +80,6 @@ const Tier = ({
     "currency",
     "emoji",
   ]);
-  console.log(errors, "submit");
 
   const [fields, setFields] = useState(fieldsData);
   const currentProfile = useAppStore((state) => state.currentProfile);
@@ -106,8 +106,7 @@ const Tier = ({
         <Form
           form={form}
           onSubmit={(formData) => {
-            console.log(formData, "strek");
-            // onClick(formData);
+            onClick(formData);
           }}
           className="items-center justify-between wm-2 z-10 my-auto xl:mt-18 w-full card border-theme  shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/500 flex"
         >
@@ -120,18 +119,23 @@ const Tier = ({
                   </label>
                   <Select
                     className="text-white"
-                    options={SUPPORTED_CURRENCIES.map(({ name, symbol }) => ({
-                      name,
-                      symbol,
-                      label: name,
-                    }))}
-                    onChange={(e) => {
-                      form.setValue("currency", e.symbol);
-                    }}
-                    defaultValue={
-                      SUPPORTED_CURRENCIES.map(({ name, symbol }) => ({
+                    options={SUPPORTED_CURRENCIES.map(
+                      ({ name, address, symbol }) => ({
                         name,
                         symbol,
+                        currency: address,
+                        label: name,
+                      })
+                    )}
+                    onChange={(e) => {
+                      form.setValue("currency", e.currency);
+                    }}
+                    selected
+                    defaultValue={
+                      SUPPORTED_CURRENCIES.map(({ name, symbol, address }) => ({
+                        name,
+                        symbol,
+                        currency: address,
                         label: name,
                       }))[0]
                     }
@@ -386,10 +390,12 @@ const TierForm = ({
   const createPost = async ({
     emoji,
     comment,
+    currency,
     amount,
   }: {
     emoji: string;
     comment: string;
+    currency: string;
     amount: number;
   }) => {
     if (!currentProfile) {
