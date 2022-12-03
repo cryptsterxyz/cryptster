@@ -186,7 +186,7 @@ const Tier = ({
                       variant="primary"
                       onClick={() => {
                         onClick(form.getValues());
-                        handleContinue()
+                        handleContinue();
                       }}
                       className="mx-auto mt-3 max-w-xs"
                     >
@@ -206,7 +206,7 @@ const Tier = ({
         currency={currency}
         activeTier={activeTier}
         tiers={fields}
-        handle="strek.lens"
+        handle={currentProfile?.handle}
       />
     </div>
   );
@@ -399,7 +399,9 @@ const TierForm = ({
       });
     }
   };
-  setPublicationContent(`gift ${currentProfile?.handle} a crypto`);
+  setPublicationContent(
+    `Collect tier to support ${currentProfile?.handle} in cryptster.xyz/u/${currentProfile?.handle}`
+  );
 
   const createPost = async ({
     emoji,

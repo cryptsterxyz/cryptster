@@ -96,7 +96,7 @@ const Editor = (props: {
 
         <RichTextPlugin
           contentEditable={
-            <ContentEditable className="px-5 block my-4 min-h-[65px] h-4/5 overflow-auto" />
+            <ContentEditable className="px-5 block my-4 min-h-[65px] h-4/5 lexical-content-editable overflow-auto" />
           }
           placeholder={
             props?.hidePlaceholder ? (

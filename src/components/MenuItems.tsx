@@ -17,7 +17,7 @@ const MenuItems: FC = () => {
   useEffect(() => {
     // check here for
     console.log(currentProfile);
-    if (currentProfile?.handle) router.push("/onboard");
+    // if (currentProfile?.handle) router.push("/onboard");
   }, [currentProfile?.handle]);
 
   if (!currentProfile) {

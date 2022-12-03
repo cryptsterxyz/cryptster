@@ -94,7 +94,7 @@ const TierCardData: FC<Props> = ({
     />
   ) : (
     <div
-      className="card border-theme  shadow-lg shadow-slate-900/5 m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 tier-card
+      className="card border-theme  shadow-lg shadow-slate-900/5 z-10 py-5 w-full lg:w-2/5 tier-card
         card shadow-lg shadow-slate-900/5 ring-slate-900/500 flex flex-col justify-center items-center
          border border-theme"
     >
@@ -139,8 +139,7 @@ const TierCardData: FC<Props> = ({
           </div>
         </div>
         <div className="card-actions">
-          <button className="btn bg-primary hover:bg-primary border-1 capitalize w-full button-primary border-theme animate-pulse">
-          </button>
+          <button className="btn bg-primary hover:bg-primary border-1 capitalize w-full button-primary border-theme animate-pulse"></button>
         </div>
       </div>
     </div>

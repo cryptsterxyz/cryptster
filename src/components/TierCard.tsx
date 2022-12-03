@@ -216,7 +216,7 @@ const TierCard = ({
   return (
     <Card
       className={clsx(
-        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 tier-card
+        `z-10 mx-3 pb-5 w-full lg:w-2/5 tier-card h-fit
         card shadow-lg shadow-slate-900/5 ring-slate-900/500 flex flex-col justify-center items-center
         `,
         {
@@ -226,7 +226,7 @@ const TierCard = ({
       )}
     >
       <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl text-center">
-        Collect tier to support {currentProfile.handle} in
+        Collect tier to support {currentProfile.handle} in{" "}
         {tiers[currentTier]?.currency}
       </h2>
       <p className="h-auto min-h-12 py-2 flex-grow-0">

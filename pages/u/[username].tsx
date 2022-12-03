@@ -51,7 +51,12 @@ const Profile = () => {
     return <div />;
   }
 
-  if (loading || !data) {
+  if (
+    loading ||
+    (!data &&
+      profile?.attributes?.filter(({ key }) => key === "about")?.[0]?.value
+        ?.length)
+  ) {
     return <PageLoader />;
   }
 
@@ -89,7 +94,7 @@ const Profile = () => {
         <div className=" font-space-grotesek font-semibold text-lg mt-2">
           @{profile.handle}
         </div>
-        <div className=" font-space-grotesek font-medium mt-3">
+        <div className=" font-space-grotesek font-medium mt-3 w-[510px]">
           {profile.bio}
         </div>
       </div>
