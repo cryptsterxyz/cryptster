@@ -8,14 +8,21 @@ import {
 import type { Profile } from "generated";
 
 import { useAppStore } from "@store/app";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import getAttributeFromTrait from "@utils/getAttributeFromTrait";
 
 interface Props {
   profile: Profile;
   type: "NEW_POST" | "REPLIES" | "MEDIA";
+  party?: boolean;
+  setParty?: Dispatch<SetStateAction<boolean>>;
 }
-const TierCardData: FC<Props> = ({ profile, type = "NEW_POST" }) => {
+const TierCardData: FC<Props> = ({
+  profile,
+  type = "NEW_POST",
+  setParty,
+  party = false,
+}) => {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const mediaFeedFilters = useProfileTierStore(
@@ -84,6 +91,8 @@ const TierCardData: FC<Props> = ({ profile, type = "NEW_POST" }) => {
       handle="strek.lens"
       tiers={tiers || []}
       publications={data?.publications.items}
+      setParty={setParty}
+      party={party}
       viewOnly={false}
     />
   );

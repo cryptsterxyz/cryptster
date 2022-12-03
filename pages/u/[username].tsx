@@ -7,6 +7,8 @@ import PageLoader from "@components/PageLoader";
 import ProfilePicture from "@components/ProfilePicture";
 import TierCard from "@components/TierCard";
 import TierCardData from "@components/TierCardData";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import { CashIcon, XIcon } from "@heroicons/react/outline";
 import { useAppStore } from "@store/app";
 import clsx from "clsx";
@@ -14,11 +16,15 @@ import { useProfileLazyQuery, useProfileQuery } from "generated";
 import { useRouter } from "next/router";
 import NotFound from "pages/404";
 import { useEffect, useState } from "react";
+import TOTAL_REVENUE from "@utils/totalRevenue";
+import { useQuery } from "@apollo/client";
 
 const Profile = () => {
   const {
     query: { username, type },
   } = useRouter();
+  const { width, height } = useWindowSize();
+  const [party, setParty] = useState(true);
   const currentProfile = useAppStore((state) => state.currentProfile);
 
   const { data, loading, error } = useProfileQuery({
@@ -28,6 +34,18 @@ const Profile = () => {
     },
     skip: !username,
   });
+
+  const profile = data?.profile;
+
+  const {
+    data: totalRevenue,
+    loading: totalRevenueLoading,
+    error: totalRevenueError,
+  } = useQuery(TOTAL_REVENUE, {
+    variables: { profileId: profile?.id },
+  });
+
+  console.log("totalRevenue", totalRevenue?.profilePublicationRevenue?.items);
 
   if (error) {
     return <div />;
@@ -41,12 +59,23 @@ const Profile = () => {
     return <NotFound />;
   }
 
-  const profile = data?.profile;
   return (
     <div
       data-theme="bg-onboard"
       className="bg-onboard text-white w-full flex flex-grow px-4 sm:px-8 flex-col"
     >
+      {party ? (
+        <Confetti
+          numberOfPieces={party ? 2000 : 0}
+          recycle={false}
+          onConfettiComplete={(confetti) => {
+            setParty(false);
+            confetti?.reset();
+          }}
+          width={width}
+          height={height}
+        />
+      ) : null}
       <div className="relative sm:min-h-[300px]">
         <CoverPicture />
         <div className="absolute -bottom-8 left-1/4 sm:left-6 z-10">
@@ -70,7 +99,7 @@ const Profile = () => {
             }
           />
         </Card>
-        <TierCardData profile={profile} />
+        <TierCardData profile={profile} setParty={setParty} party={party} />
         {/* <TierCard handle="strek.lens" tiers={fields} viewOnly={false} /> */}
       </div>
       <div className="m-11 "></div>

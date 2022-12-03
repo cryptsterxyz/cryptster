@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import Button from "@components/Button";
 import Card from "./Card";
 import clsx from "clsx";
@@ -32,6 +32,8 @@ interface TierProps {
   activeTier?: number;
   viewOnly?: boolean;
   publications?: any;
+  party?: boolean;
+  setParty?: any;
 }
 
 const handleGift = () => {
@@ -43,6 +45,8 @@ const TierCard = ({
   activeTier = 0,
   tiers,
   publications,
+  setParty,
+  party = false,
   viewOnly = true,
 }: TierProps) => {
   const [currentTier, setCurrentTier] = useState(activeTier);
@@ -57,6 +61,8 @@ const TierCard = ({
   });
 
   const onCompleted = () => {
+    setParty(!party);
+
     toast.success("Transaction submitted successfully!");
   };
 
