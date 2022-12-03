@@ -216,19 +216,19 @@ const TierForm = ({
     {
       amount: 1,
       comment: "",
-      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      currency: "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
       emoji: "💰",
     },
     {
       amount: 2,
       comment: "",
-      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      currency: "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
       emoji: "💰",
     },
     {
       amount: 5,
       comment: "",
-      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+      currency: "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
       emoji: "💰",
     },
   ]);
@@ -260,6 +260,8 @@ const TierForm = ({
   // Collect module store
   const resetCollectSettings = useCollectModuleStore((state) => state.reset);
   const payload = useCollectModuleStore((state) => state.payload);
+  const setPayload = useCollectModuleStore((state) => state.setPayload);
+  const followerOnly = useCollectModuleStore((state) => state.followerOnly);
 
   // Transaction persist store
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
@@ -320,6 +322,7 @@ const TierForm = ({
   const [createPostTypedData, { loading: typedDataLoading }] =
     useCreatePostTypedDataMutation({
       onCompleted: async ({ createPostTypedData }) => {
+        debugger;
         try {
           const { id, typedData } = createPostTypedData;
           const {
@@ -403,6 +406,18 @@ const TierForm = ({
     currency: string;
     amount: number;
   }) => {
+    const baseFeeData = {
+      amount: {
+        currency: currency,
+        value: amount.toString(),
+      },
+      recipient: currentProfile?.ownedBy,
+      referralFee: parseFloat("0"),
+      followerOnly,
+    };
+    setPayload({
+      feeCollectModule: { ...baseFeeData },
+    });
     if (!currentProfile) {
       return toast.error(SIGN_WALLET);
     }
@@ -463,7 +478,7 @@ const TierForm = ({
     const request = {
       profileId: currentProfile?.id,
       contentURI: `https://arweave.net/${id}`,
-      collectModule: payload,
+      collectModule: { feeCollectModule: { ...baseFeeData } },
       referenceModule: {
         followerOnlyReferenceModule: false,
       },

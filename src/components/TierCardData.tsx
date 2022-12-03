@@ -79,6 +79,13 @@ const TierCardData: FC<Props> = ({ profile, type = "NEW_POST" }) => {
       {}
     ),
   }));
-  return <TierCard handle="strek.lens" tiers={tiers || []} viewOnly={false} />;
+  return (
+    <TierCard
+      handle="strek.lens"
+      tiers={tiers || []}
+      publications={data?.publications.items}
+      viewOnly={false}
+    />
+  );
 };
 export default TierCardData;
