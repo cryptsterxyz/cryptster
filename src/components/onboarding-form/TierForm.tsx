@@ -36,6 +36,7 @@ import { useTransactionPersistStore } from "@store/transaction";
 import { useReferenceModuleStore } from "@store/reference-module";
 import router from "next/router";
 import React from "react";
+import MockTierCard from "@components/MockTierCard";
 
 export type tier = {
   isLoading?: boolean;
@@ -200,7 +201,11 @@ const Tier = ({
           </AppearAnimation>
         </Form>
       </div>
-      <TierCard activeTier={activeTier} tiers={fields} handle="strek.lens" />
+      <MockTierCard
+        activeTier={activeTier}
+        tiers={fields}
+        handle="strek.lens"
+      />
     </div>
   );
 };
@@ -322,7 +327,6 @@ const TierForm = ({
   const [createPostTypedData, { loading: typedDataLoading }] =
     useCreatePostTypedDataMutation({
       onCompleted: async ({ createPostTypedData }) => {
-        debugger;
         try {
           const { id, typedData } = createPostTypedData;
           const {
