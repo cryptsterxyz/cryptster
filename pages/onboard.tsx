@@ -1,5 +1,6 @@
 import AppearAnimation from "@components/AnimatedAppear";
 import { Avatar } from "@components/Avatar";
+import Button from "@components/Button";
 import Card from "@components/Card";
 import Editor from "@components/Editor";
 import withEditorContext from "@components/Editor/withLexicalContext";
@@ -8,12 +9,13 @@ import BasicDetails from "@components/onboarding-form/BasicDetails";
 import TierForm from "@components/onboarding-form/TierForm";
 import { useAppStore } from "@store/app";
 import { useState } from "react";
+import { LoaderIcon } from "react-hot-toast";
 import withAuthenticatedRoute from "src/utils/withAuthenticatedRoute";
 
 function OnBoard() {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
-  const [steps, setSteps] = useState(0);
+  const [steps, setSteps] = useState(1);
   return (
     <div className="flex flex-grow  bg-onboard">
       <div className="flex justify-center items-center flex-col flex-grow bg-onboard-overlay">
@@ -31,7 +33,16 @@ function OnBoard() {
           <div className="magic-card w-[50vw]">
             <Card className="ring-1 bg-gray-900  ring-slate-900/500 flex flex-col justify-center items-center onboard w-[50vw] h-full">
               <h2 className="text-white">Let People know what you do</h2>
-              <Editor className="h-full lexical-about h-[500px]" />
+              <Editor className=" lexical-about h-[500px]" />
+              <Button
+                onClick={() => setSteps(2)}
+                type="submit"
+                variant="primary"
+                className="mx-auto mt-3 max-w-xs"
+              >
+                {/* {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} */}
+                continue
+              </Button>
             </Card>
           </div>
         )}
