@@ -1,6 +1,8 @@
 import AppearAnimation from "@components/AnimatedAppear";
 import { Avatar } from "@components/Avatar";
 import Card from "@components/Card";
+import Editor from "@components/Editor";
+import withEditorContext from "@components/Editor/withLexicalContext";
 import NavBar from "@components/NavBar";
 import BasicDetails from "@components/onboarding-form/BasicDetails";
 import TierForm from "@components/onboarding-form/TierForm";
@@ -26,6 +28,14 @@ function OnBoard() {
           </div>
         )}
         {steps === 1 && (
+          <div className="magic-card w-[50vw]">
+            <Card className="ring-1 bg-gray-900  ring-slate-900/500 flex flex-col justify-center items-center onboard w-[50vw] h-full">
+              <h2 className="text-white">Let People know what you do</h2>
+              <Editor className="h-full lexical-about h-[500px]" />
+            </Card>
+          </div>
+        )}
+        {steps === 2 && (
           <AppearAnimation className="flex flex-col justify-center items-center w-4/5">
             <TierForm onComplete={setSteps} />
           </AppearAnimation>
@@ -35,4 +45,4 @@ function OnBoard() {
   );
 }
 
-export default withAuthenticatedRoute(OnBoard);
+export default withAuthenticatedRoute(withEditorContext(OnBoard));

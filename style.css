@@ -211,3 +211,18 @@ div[data-lexical-editor="true"] {
   border-radius: 8px;
   border: 0;
 }
+
+.lexical-about {
+  @apply text-white;
+}
+
+.onboard-icon {
+  color: white;
+}
+
+[data-theme="user"] .onboard-icon {
+  @apply text-theme;
+}
+[data-theme="user"] .toolbar-icons button:hover .onboard-icon{ 
+  @apply text-white;
+}
