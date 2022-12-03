@@ -9,8 +9,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-onboard font-bold text-[100px] text-white flex flex-grow flex-col justify-center items-center text-center">
-        <p>Decentralized crowd funding platform</p>
-        <img className="brand-logo" src="/logo.svg" />
+        <p className=" leading-[110px]">
+          Decentralized crowd <br />
+          funding platform
+        </p>
+        <img className="brand-logo mt-10" src="/logo.svg" />
       </div>
     </>
   );

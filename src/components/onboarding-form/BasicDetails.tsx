@@ -34,6 +34,7 @@ import withEditorContext from "@components/Editor/withLexicalContext";
 import AppearAnimation from "@components/AnimatedAppear";
 import { Avatar } from "@components/Avatar";
 import Bio from "@components/Bio";
+import ProfilePicture from "@components/ProfilePicture";
 // const schema = z.object({
 //   name: z.string().min(1, { message: "Required" }),
 //   age: z.number().min(10),
@@ -219,8 +220,7 @@ const BasicDetails = ({
               editProfile(name, bio);
             }}
           >
-            <Avatar size={12} src="/cryptster.svg" />
-
+            <ProfilePicture />
             <Input
               type={""}
               label="Name"

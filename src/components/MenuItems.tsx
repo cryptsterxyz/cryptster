@@ -16,8 +16,8 @@ const MenuItems: FC = () => {
   const router = useRouter();
   useEffect(() => {
     // check here for
-    console.log(currentProfile)
-    if (currentProfile?.handle === 'asdas') router.push("/onboard");
+    console.log(currentProfile);
+    if (currentProfile?.handle) router.push("/onboard");
   }, [currentProfile?.handle]);
 
   if (!currentProfile) {
