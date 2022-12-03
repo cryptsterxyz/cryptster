@@ -37,7 +37,7 @@ html {
   background-size: 86.125rem;
 }
 
-[data-theme="light"] input {
+[data-theme="light"] input:not(#react-select-3-input) {
   @apply ring-1 !bg-slate-900 text-white;
 }
 
