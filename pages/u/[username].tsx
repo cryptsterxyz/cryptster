@@ -81,7 +81,7 @@ const Profile = () => {
       <div className="border-b border-b-theme mt-5"></div>
       <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
         <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 border border-theme-user">
-          <Editor className="min-h-[300px]" />
+          <Editor viewOnly className="min-h-[300px]" />
         </Card>
         <TierCardData profile={profile} />
         {/* <TierCard handle="strek.lens" tiers={fields} viewOnly={false} /> */}

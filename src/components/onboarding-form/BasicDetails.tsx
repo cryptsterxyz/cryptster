@@ -176,7 +176,6 @@ const BasicDetails = ({
       profileId: currentProfile?.id,
       metadata: `https://arweave.net/${id}`,
     };
-    console.log("dg", currentProfile);
     if (currentProfile?.dispatcher?.canUseRelay) {
       createViaDispatcher(request);
     } else {
