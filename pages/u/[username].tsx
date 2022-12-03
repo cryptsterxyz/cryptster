@@ -85,6 +85,9 @@ const Profile = () => {
       <div className=" font-space-grotesek font-bold text-4xl mt-10">
         {profile.name}
       </div>
+      <div className=" font-space-grotesek font-semibold text-lg mt-2">
+        @{profile.handle}
+      </div>
       <div className=" font-space-grotesek font-medium mt-3">{profile.bio}</div>
       <div className="ring-1 mt-5"></div>
       <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
