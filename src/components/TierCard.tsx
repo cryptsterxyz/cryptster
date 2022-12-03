@@ -4,13 +4,22 @@ import Card from "./Card";
 import clsx from "clsx";
 import { XIcon } from "@heroicons/react/outline";
 import { tier } from "./onboarding-form/TierForm";
-
+import toast from "react-hot-toast";
+import { SIGN_WALLET } from "@utils/constants";
+import { useAppStore } from "@store/app";
+import { CollectModules, useCollectModuleQuery } from "../../generated";
 interface TierProps {
   tiers: Array<tier>;
   handle: string;
   activeTier?: number;
   viewOnly?: boolean;
 }
+
+const currentProfile = useAppStore((state) => state.currentProfile);
+
+const handleGift = () => {
+  alert("hiiii");
+};
 
 const TierCard = ({
   handle,
@@ -68,9 +77,7 @@ const TierCard = ({
       <div className="card-actions">
         <Button
           className="capitalize w-full button-primary border-theme"
-          onClick={() => {
-            !viewOnly && alert(tiers[currentTier]?.amount);
-          }}
+          onClick={handleGift}
         >
           Gift {tiers[currentTier]?.amount}
         </Button>

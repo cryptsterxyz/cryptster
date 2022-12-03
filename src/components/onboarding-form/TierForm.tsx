@@ -216,6 +216,8 @@ const TierForm = ({
   // Collect module store
   const resetCollectSettings = useCollectModuleStore((state) => state.reset);
   const payload = useCollectModuleStore((state) => state.payload);
+  const setPayload = useCollectModuleStore((state) => state.setPayload);
+  const followerOnly = useCollectModuleStore((state) => state.followerOnly);
 
   // Transaction persist store
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
@@ -357,6 +359,18 @@ const TierForm = ({
     comment: string;
     amount: number;
   }) => {
+    const baseFeeData = {
+      amount: {
+        currency: "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+        value: amount.toString(),
+      },
+      recipient: currentProfile?.ownedBy,
+      referralFee: parseFloat("0"),
+      followerOnly,
+    };
+    setPayload({
+      feeCollectModule: { ...baseFeeData },
+    });
     if (!currentProfile) {
       return toast.error(SIGN_WALLET);
     }
@@ -417,7 +431,7 @@ const TierForm = ({
     const request = {
       profileId: currentProfile?.id,
       contentURI: `https://arweave.net/${id}`,
-      collectModule: payload,
+      collectModule: { feeCollectModule: { ...baseFeeData } },
       referenceModule: {
         followerOnlyReferenceModule: false,
       },
