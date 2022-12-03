@@ -32,6 +32,8 @@ import { LensHubProxy } from "@abis/LensHubProxy";
 import onError from "@utils/onError";
 import { useTransactionPersistStore } from "@store/transaction";
 import { useReferenceModuleStore } from "@store/reference-module";
+import router from "next/router";
+import React from "react";
 
 export type tier = {
   isLoading?: boolean;
@@ -71,6 +73,7 @@ const Tier = ({
   console.log(errors, "submit");
 
   const [fields, setFields] = useState(fieldsData);
+  const currentProfile = useAppStore((state) => state.currentProfile);
 
   useEffect(() => {
     const newTiersData = [
@@ -83,6 +86,10 @@ const Tier = ({
     ];
     setFields(newTiersData);
   }, [comment, amount, emoji]);
+
+  const handleContinue = () => {
+    router.push(`/u/${currentProfile?.handle}`);
+  };
 
   return (
     <div className="flex justify-between">
@@ -117,14 +124,37 @@ const Tier = ({
                 placeholder="💰"
                 {...form.register(`emoji`)}
               />
-              <Button
+              {/* <Button
                 disabled={isLoading}
                 type="submit"
                 variant="primary"
                 className="mx-auto mt-3 max-w-xs"
               >
                 {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add more
-              </Button>
+              </Button> */}
+              <div className="flex">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  variant="primary"
+                  className="mx-auto mt-3 max-w-xs"
+                >
+                  {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add
+                  more
+                </Button>
+
+                {activeTier >= 2 ? (
+                  <Button
+                    variant="primary"
+                    onClick={handleContinue}
+                    className="mx-auto mt-3 max-w-xs"
+                  >
+                    continue
+                  </Button>
+                ) : (
+                  <React.Fragment />
+                )}
+              </div>
             </Card>
           </AppearAnimation>
         </Form>
