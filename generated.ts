@@ -236,19 +236,19 @@ export type ClaimableHandles = {
 
 /** Condition that signifies if address or profile has collected a publication */
 export type CollectConditionInput = {
-  /** The collected publication id */
-  publicationId: Scalars['PublicationId'];
-  /** The collected publication id */
-  publisherId: Scalars['ProfileId'];
+  /** The publication id that has to be collected to unlock content */
+  publicationId?: InputMaybe<Scalars['ProfileId']>;
+  /** True if the content will be unlocked for this specific publication */
+  thisPublication?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Condition that signifies if address or profile has collected a publication */
 export type CollectConditionOutput = {
   __typename?: 'CollectConditionOutput';
-  /** The collected publication id */
-  publicationId: Scalars['PublicationId'];
-  /** The collected publication id */
-  publisherId: Scalars['ProfileId'];
+  /** The publication id that has to be collected to unlock content */
+  publicationId?: Maybe<Scalars['ProfileId']>;
+  /** True if the content will be unlocked for this specific publication */
+  thisPublication?: Maybe<Scalars['Boolean']>;
 };
 
 export type CollectModule = FeeCollectModuleSettings | FreeCollectModuleSettings | LimitedFeeCollectModuleSettings | LimitedTimedFeeCollectModuleSettings | RevertCollectModuleSettings | TimedFeeCollectModuleSettings | UnknownCollectModuleSettings;
@@ -931,6 +931,10 @@ export type CreateUnfollowBroadcastItemResult = {
   typedData: CreateBurnEip712TypedData;
 };
 
+export type CurRequest = {
+  secret: Scalars['String'];
+};
+
 /** The custom filters types */
 export enum CustomFiltersTypes {
   Gardeners = 'GARDENERS'
@@ -944,6 +948,7 @@ export enum DecryptFailReason {
   DoesNotOwnProfile = 'DOES_NOT_OWN_PROFILE',
   FollowNotFinalisedOnChain = 'FOLLOW_NOT_FINALISED_ON_CHAIN',
   HasNotCollectedPublication = 'HAS_NOT_COLLECTED_PUBLICATION',
+  MissingEncryptionParams = 'MISSING_ENCRYPTION_PARAMS',
   ProfileDoesNotExist = 'PROFILE_DOES_NOT_EXIST',
   UnauthorizedAddress = 'UNAUTHORIZED_ADDRESS',
   UnauthorizedBalance = 'UNAUTHORIZED_BALANCE'
@@ -1133,16 +1138,12 @@ export type EnsOnChainIdentity = {
 export type EoaOwnershipInput = {
   /** The address that will have access to the content */
   address: Scalars['EthereumAddress'];
-  /** The chain ID of the address */
-  chainID: Scalars['ChainId'];
 };
 
 export type EoaOwnershipOutput = {
   __typename?: 'EoaOwnershipOutput';
   /** The address that will have access to the content */
   address: Scalars['EthereumAddress'];
-  /** The chain ID of the address */
-  chainID: Scalars['ChainId'];
 };
 
 /** The erc20 type */
@@ -1536,6 +1537,12 @@ export type HasTxHashBeenIndexedRequest = {
   txId?: InputMaybe<Scalars['TxId']>;
 };
 
+export type HelRequest = {
+  handle: Scalars['Handle'];
+  remove: Scalars['Boolean'];
+  secret: Scalars['String'];
+};
+
 export type HidePublicationRequest = {
   /** Publication id */
   publicationId: Scalars['InternalPublicationId'];
@@ -1865,6 +1872,7 @@ export type Mutation = {
   createSetProfileMetadataViaDispatcher: RelayResult;
   createToggleFollowTypedData: CreateToggleFollowBroadcastItemResult;
   createUnfollowTypedData: CreateUnfollowBroadcastItemResult;
+  hel?: Maybe<Scalars['Void']>;
   hidePublication?: Maybe<Scalars['Void']>;
   proxyAction: Scalars['ProxyActionId'];
   refresh: AuthenticationResult;
@@ -2021,6 +2029,11 @@ export type MutationCreateToggleFollowTypedDataArgs = {
 export type MutationCreateUnfollowTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: UnfollowRequest;
+};
+
+
+export type MutationHelArgs = {
+  request: HelRequest;
 };
 
 
@@ -3053,6 +3066,7 @@ export type Query = {
   challenge: AuthChallengeResult;
   claimableHandles: ClaimableHandles;
   claimableStatus: ClaimStatus;
+  cur: Array<Scalars['String']>;
   defaultProfile?: Maybe<Profile>;
   doesFollow: Array<DoesFollowResponse>;
   enabledModuleCurrencies: Array<Erc20>;
@@ -3115,6 +3129,11 @@ export type QueryApprovedModuleAllowanceAmountArgs = {
 
 export type QueryChallengeArgs = {
   request: ChallengeRequest;
+};
+
+
+export type QueryCurArgs = {
+  request: CurRequest;
 };
 
 
@@ -4115,10 +4134,10 @@ export type HasTxHashBeenIndexedQueryVariables = Exact<{
 
 export type HasTxHashBeenIndexedQuery = { __typename?: 'Query', hasTxHashBeenIndexed: { __typename?: 'TransactionError', reason: TransactionErrorReasons } | { __typename?: 'TransactionIndexedResult', txHash: any, indexed: boolean, metadataStatus?: { __typename?: 'PublicationMetadataStatus', status: PublicationMetadataStatusType } | null } };
 
-export type CryptsterStatsQueryVariables = Exact<{ [key: string]: never; }>;
+export type LensterStatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CryptsterStatsQuery = { __typename?: 'Query', globalProtocolStats: { __typename?: 'GlobalProtocolStats', totalProfiles: number, totalPosts: number, totalBurntProfiles: number, totalMirrors: number, totalComments: number, totalCollects: number, totalFollows: number } };
+export type LensterStatsQuery = { __typename?: 'Query', globalProtocolStats: { __typename?: 'GlobalProtocolStats', totalProfiles: number, totalPosts: number, totalBurntProfiles: number, totalMirrors: number, totalComments: number, totalCollects: number, totalFollows: number } };
 
 export type LikesQueryVariables = Exact<{
   request: WhoReactedPublicationRequest;
@@ -6426,9 +6445,9 @@ export function useHasTxHashBeenIndexedLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type HasTxHashBeenIndexedQueryHookResult = ReturnType<typeof useHasTxHashBeenIndexedQuery>;
 export type HasTxHashBeenIndexedLazyQueryHookResult = ReturnType<typeof useHasTxHashBeenIndexedLazyQuery>;
 export type HasTxHashBeenIndexedQueryResult = Apollo.QueryResult<HasTxHashBeenIndexedQuery, HasTxHashBeenIndexedQueryVariables>;
-export const CryptsterStatsDocument = gql`
-    query CryptsterStats {
-  globalProtocolStats(request: {sources: "Cryptster"}) {
+export const LensterStatsDocument = gql`
+    query LensterStats {
+  globalProtocolStats(request: {sources: "Lenster"}) {
     totalProfiles
     totalPosts
     totalBurntProfiles
@@ -6441,31 +6460,31 @@ export const CryptsterStatsDocument = gql`
     `;
 
 /**
- * __useCryptsterStatsQuery__
+ * __useLensterStatsQuery__
  *
- * To run a query within a React component, call `useCryptsterStatsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCryptsterStatsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useLensterStatsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLensterStatsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCryptsterStatsQuery({
+ * const { data, loading, error } = useLensterStatsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useCryptsterStatsQuery(baseOptions?: Apollo.QueryHookOptions<CryptsterStatsQuery, CryptsterStatsQueryVariables>) {
+export function useLensterStatsQuery(baseOptions?: Apollo.QueryHookOptions<LensterStatsQuery, LensterStatsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CryptsterStatsQuery, CryptsterStatsQueryVariables>(CryptsterStatsDocument, options);
+        return Apollo.useQuery<LensterStatsQuery, LensterStatsQueryVariables>(LensterStatsDocument, options);
       }
-export function useCryptsterStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CryptsterStatsQuery, CryptsterStatsQueryVariables>) {
+export function useLensterStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LensterStatsQuery, LensterStatsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CryptsterStatsQuery, CryptsterStatsQueryVariables>(CryptsterStatsDocument, options);
+          return Apollo.useLazyQuery<LensterStatsQuery, LensterStatsQueryVariables>(LensterStatsDocument, options);
         }
-export type CryptsterStatsQueryHookResult = ReturnType<typeof useCryptsterStatsQuery>;
-export type CryptsterStatsLazyQueryHookResult = ReturnType<typeof useCryptsterStatsLazyQuery>;
-export type CryptsterStatsQueryResult = Apollo.QueryResult<CryptsterStatsQuery, CryptsterStatsQueryVariables>;
+export type LensterStatsQueryHookResult = ReturnType<typeof useLensterStatsQuery>;
+export type LensterStatsLazyQueryHookResult = ReturnType<typeof useLensterStatsLazyQuery>;
+export type LensterStatsQueryResult = Apollo.QueryResult<LensterStatsQuery, LensterStatsQueryVariables>;
 export const LikesDocument = gql`
     query Likes($request: WhoReactedPublicationRequest!) {
   whoReactedPublication(request: $request) {
