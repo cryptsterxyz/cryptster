@@ -106,6 +106,7 @@ const Tier = ({
         <Form
           form={form}
           onSubmit={(formData) => {
+            console.log(form);
             onClick(formData);
           }}
           className="items-center justify-between wm-2 z-10 my-auto xl:mt-18 w-full card border-theme  shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/500 flex"
@@ -174,6 +175,7 @@ const Tier = ({
                   <Button
                     disabled={isLoading}
                     type="submit"
+                    // onClick={ () => {console.log('as')}}
                     variant="primary"
                     className="mx-auto mt-3 max-w-xs"
                   >
@@ -214,16 +216,19 @@ const TierForm = ({
     {
       amount: 1,
       comment: "",
+      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
       emoji: "💰",
     },
     {
       amount: 2,
       comment: "",
+      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
       emoji: "💰",
     },
     {
       amount: 5,
       comment: "",
+      currency: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
       emoji: "💰",
     },
   ]);

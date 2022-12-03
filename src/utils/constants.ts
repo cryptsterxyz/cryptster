@@ -105,3 +105,7 @@ export const SUPPORTED_CURRENCIES = [
     __typename: "Erc20",
   },
 ];
+
+export const IMGPROXY_URL = "https://media.lenster.xyz";
+export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+export const AVATAR = 'avatar';
