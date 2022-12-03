@@ -49,6 +49,7 @@ export type tier = {
 const Tier = ({
   index,
   field,
+  setTiersFields,
   isLoading = false,
   fieldsData,
   onClick,
@@ -56,6 +57,11 @@ const Tier = ({
 }: {
   index: number;
   field: tier;
+  setTiersFields: Dispatch<
+    SetStateAction<
+      { amount: number; comment: string; currency: string; emoji: string }[]
+    >
+  >;
   isLoading?: boolean;
   fieldsData: Array<tier>;
   activeTier: number;
@@ -95,6 +101,7 @@ const Tier = ({
       ...fieldsData.slice(activeTier + 1),
     ];
     setFields(newTiersData);
+    setTiersFields(newTiersData);
   }, [comment, amount, currency, emoji]);
 
   const handleContinue = () => {
@@ -107,7 +114,6 @@ const Tier = ({
         <Form
           form={form}
           onSubmit={(formData) => {
-            console.log(form);
             onClick(formData);
           }}
           className="items-center justify-between wm-2 z-10 my-auto xl:mt-18 w-full card border-theme  shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/500 flex"
@@ -129,7 +135,7 @@ const Tier = ({
                         label: name,
                       })
                     )}
-                    onChange={(e) => {
+                    onChange={(e: { currency: string; }) => {
                       form.setValue("currency", e.currency);
                     }}
                     selected
@@ -164,19 +170,10 @@ const Tier = ({
                   placeholder="💰"
                   {...form.register(`emoji`)}
                 />
-                {/* <Button
-                disabled={isLoading}
-                type="submit"
-                variant="primary"
-                className="mx-auto mt-3 max-w-xs"
-              >
-                {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add more
-              </Button> */}
                 <div className="flex">
                   <Button
                     disabled={isLoading}
                     type="submit"
-                    // onClick={ () => {console.log('as')}}
                     variant="primary"
                     className="mx-auto mt-3 max-w-xs"
                   >
@@ -520,6 +517,7 @@ const TierForm = ({
         className=""
         stages={fields.map((field, index) => (
           <Tier
+            setTiersFields={setFields}
             isLoading={isLoading}
             activeTier={activeTier}
             key={`tier-${index}`}

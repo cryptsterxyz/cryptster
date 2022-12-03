@@ -2,14 +2,13 @@ import MenuItems from "@components/MenuItems";
 import ThemeToggle from "./ThemeToggle";
 
 const NavBar = () => (
-  <div className="navbar bg-slate-900 text-white">
-    <div className="navbar-start"></div>
-    <div className="navbar-center">
-      <a className="btn btn-ghost normal-case text-xl">Cryptster</a>
+  <div className="navbar h-8 bg-slate-900 text-white">
+    <div className="navbar-start ml-10">
+      <img src="/logo.svg" className="w-8 h-8" />
+      <p className="ml-2">Cryptster</p>
     </div>
-    <MenuItems />
     <div className="navbar-end">
-      <ThemeToggle />
+      <MenuItems />
     </div>
   </div>
 );

@@ -1639,7 +1639,7 @@
     "@lexical/selection" "0.6.4"
     "@lexical/utils" "0.6.4"
 
-"@lexical/code@0.6.4", "@lexical/code@^0.6.4":
+"@lexical/code@0.6.4":
   version "0.6.4"
   resolved "https://registry.npmjs.org/@lexical/code/-/code-0.6.4.tgz"
   integrity sha512-fsGLvY6BgLSuKRn4/xqbZMnJSrY3u1b2htk7AKVOBxSeEENjLClMkdomVvbWF6CkGMX1c1wkP93MmeOe9VmF/g==
@@ -1673,7 +1673,7 @@
   dependencies:
     "@lexical/selection" "0.6.4"
 
-"@lexical/link@0.6.4", "@lexical/link@^0.6.4":
+"@lexical/link@0.6.4":
   version "0.6.4"
   resolved "https://registry.npmjs.org/@lexical/link/-/link-0.6.4.tgz"
   integrity sha512-4ergNX/GOKyRFUIf2daflB1LzU96UAi4mGH3QdkvfDBo+a4eFj7GYXCf98ktilhvGlC7El4cgLVCq/BoidjS/w==
@@ -1694,7 +1694,7 @@
   dependencies:
     "@lexical/utils" "0.6.4"
 
-"@lexical/markdown@0.6.4", "@lexical/markdown@^0.6.4":
+"@lexical/markdown@0.6.4":
   version "0.6.4"
   resolved "https://registry.npmjs.org/@lexical/markdown/-/markdown-0.6.4.tgz"
   integrity sha512-9kg+BsP4ePCztrK7UYW8a+8ad1/h/OLziJkMZkl3YAkfhJudkHoj4ljCTJZcLuXHtVXmvLZhyGZktitcJImnOg==
@@ -1721,9 +1721,9 @@
   resolved "https://registry.npmjs.org/@lexical/plain-text/-/plain-text-0.6.4.tgz"
   integrity sha512-VB1zKqyef+3Vs8SVwob1HvCGRRfn4bypyKUyk93kk6LQDpjiGC6Go2OyuPX0EuJeFnQBYmYd3Bi205k/nVjfZA==
 
-"@lexical/react@^0.6.4":
+"@lexical/react@0.6.4":
   version "0.6.4"
-  resolved "https://registry.npmjs.org/@lexical/react/-/react-0.6.4.tgz"
+  resolved "https://registry.yarnpkg.com/@lexical/react/-/react-0.6.4.tgz#80e524701ec83797fd66b89d1bc04c63afc0d9fc"
   integrity sha512-KAbNF/H5TzwCBFe5zuxz9ZSxj6a9ol8a2JkhACriO4HqWM0mURsxrXU8g3hySFpp4W7tdjpGSWsHLTdnaovHzw==
   dependencies:
     "@lexical/clipboard" "0.6.4"
@@ -5597,9 +5597,9 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lexical@^0.6.4:
+lexical@0.6.4:
   version "0.6.4"
-  resolved "https://registry.npmjs.org/lexical/-/lexical-0.6.4.tgz"
+  resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.6.4.tgz#00f5070a967fd1410aaa7d4c928f6e61af73c604"
   integrity sha512-QBJEowv2FRkanu9V4HxCiR/V0rECt98zUeHsaYcgUCphrxbZseQgk8AO5UbHJMgAD4iQ0CCKZWbiqbv7Z8tYnw==
 
 lilconfig@^2.0.5, lilconfig@^2.0.6:

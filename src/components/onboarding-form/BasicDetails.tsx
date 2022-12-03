@@ -265,7 +265,7 @@ const BasicDetails = ({
               initialState={
                 currentProfile?.attributes.filter(
                   ({ key }) => key === "about"
-                )?.[0].value
+                )?.[0]?.value
               }
               viewOnly
               className=" lexical-about h-[500px]"
