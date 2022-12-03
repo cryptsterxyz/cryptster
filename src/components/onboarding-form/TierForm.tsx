@@ -217,7 +217,7 @@ const TierForm = ({
 }: {
   onComplete: Dispatch<SetStateAction<number>>;
 }) => {
-  const [activeTier, setActiveTier] = useState(2);
+  const [activeTier, setActiveTier] = useState(0);
 
   const [fields, setFields] = useState([
     {
