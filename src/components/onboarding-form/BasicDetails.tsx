@@ -29,6 +29,8 @@ import { LENS_PERIPHERY, RELAY_ON, SIGN_WALLET } from "@utils/constants";
 
 import { splitSignature } from "ethers/lib/utils.js";
 import IndexStatus from "@components/shared/IndexStatus";
+import Editor from "@components/Editor";
+import withEditorContext from "@components/Editor/withLexicalContext";
 // const schema = z.object({
 //   name: z.string().min(1, { message: "Required" }),
 //   age: z.number().min(10),

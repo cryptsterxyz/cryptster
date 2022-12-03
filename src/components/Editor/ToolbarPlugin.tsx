@@ -1,13 +1,16 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import BoldIcon from "@components/icons/type-bold";
+import ItalicIcon from "@components/icons/type-italic";
+import { CodeIcon } from "@heroicons/react/outline";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   $getSelection,
   $isRangeSelection,
   COMMAND_PRIORITY_CRITICAL,
   FORMAT_TEXT_COMMAND,
-  SELECTION_CHANGE_COMMAND
-} from 'lexical';
-import type { FC } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+  SELECTION_CHANGE_COMMAND,
+} from "lexical";
+import type { FC } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const ToolbarPlugin: FC = () => {
   const [editor] = useLexicalComposerContext();
@@ -19,9 +22,9 @@ const ToolbarPlugin: FC = () => {
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
-      setIsBold(selection.hasFormat('bold'));
-      setIsItalic(selection.hasFormat('italic'));
-      setIsCode(selection.hasFormat('code'));
+      setIsBold(selection.hasFormat("bold"));
+      setIsItalic(selection.hasFormat("italic"));
+      setIsCode(selection.hasFormat("code"));
     }
   }, []);
 
@@ -40,31 +43,31 @@ const ToolbarPlugin: FC = () => {
   return (
     <div className="w-full px-5 py-2 flex toolbar-icons border-b-theme border-b space-x-1">
       <button
-        className={isBold ? 'bg-theme-darker' : ''}
+        className={isBold ? "bg-theme-darker" : ""}
         title="Bold"
         onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
         }}
       >
-        <i className="toolbar-icon bold text-theme" />
+        <BoldIcon className="onboard-icon" />
       </button>
       <button
-        className={isItalic ? 'bg-theme-darker' : ''}
+        className={isItalic ? "bg-theme-darker" : ""}
         title="Italic"
         onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
         }}
       >
-        <i className="toolbar-icon italic" />
+        <ItalicIcon className="onboard-icon" />
       </button>
       <button
-        className={isCode ? 'bg-theme-darker' : ''}
+        className={isCode ? "bg-theme-darker" : ""}
         title="Code"
         onClick={() => {
-          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
+          activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
         }}
       >
-        <i className="toolbar-icon code" />
+        <CodeIcon className="onboard-icon h-4" />
       </button>
     </div>
   );

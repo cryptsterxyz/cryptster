@@ -8,7 +8,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { MarkdownShortcutPlugin } from "@lexical/react/LexicalMarkdownShortcutPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import type { FC } from "react";
+import type { ClassAttributes, FC, HTMLAttributes } from "react";
 // import { usePublicationStore } from 'src/store/publication';
 
 // import MentionsPlugin from './AtMentionsPlugin';
@@ -20,7 +20,9 @@ import clsx from "clsx";
 
 const TRANSFORMERS = [...TEXT_FORMAT_TRANSFORMERS];
 
-const Editor: FC = (props) => {
+const Editor = (
+  props: JSX.IntrinsicAttributes & HTMLAttributes<HTMLDivElement>
+): JSX.Element => {
   // const setPublicationContent = usePublicationStore((state) => state.setPublicationContent);
 
   return (

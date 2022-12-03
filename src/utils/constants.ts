@@ -67,3 +67,41 @@ export const LS_KEYS = {
 // Bundlr
 export const BUNDLR_CURRENCY = "matic";
 export const BUNDLR_NODE_URL = "https://node2.bundlr.network";
+
+export const SUPPORTED_CURRENCIES = [
+  {
+    name: "Wrapped Matic",
+    symbol: "WMATIC",
+    decimals: 18,
+    address: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+    typename: "Erc20",
+  },
+  {
+    name: "Wrapped Ether",
+    symbol: "WETH",
+    decimals: 18,
+    address: "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
+    typename: "Erc20",
+  },
+  {
+    name: "USD Coin (PoS)",
+    symbol: "USDC",
+    decimals: 6,
+    address: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    typename: "Erc20",
+  },
+  {
+    name: "(PoS) Dai Stablecoin",
+    symbol: "DAI",
+    decimals: 18,
+    address: "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    typename: "Erc20",
+  },
+  {
+    name: "Toucan Protocol: Nature Carbon Tonne",
+    symbol: "NCT",
+    decimals: 18,
+    address: "0xD838290e877E0188a4A44700463419ED96c16107",
+    __typename: "Erc20",
+  },
+];

@@ -37,7 +37,7 @@ html {
   background-size: 86.125rem;
 }
 
-[data-theme="light"] input {
+[data-theme="light"] input:not(#react-select-3-input) {
   @apply ring-1 !bg-slate-900 text-white;
 }
 
@@ -210,4 +210,19 @@ div[data-lexical-editor="true"] {
   background-color: #fff;
   border-radius: 8px;
   border: 0;
+}
+
+.lexical-about {
+  @apply text-white;
+}
+
+.onboard-icon {
+  color: white;
+}
+
+[data-theme="user"] .onboard-icon {
+  @apply text-theme;
+}
+[data-theme="user"] .toolbar-icons button:hover .onboard-icon{ 
+  @apply text-white;
 }

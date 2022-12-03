@@ -1,4 +1,6 @@
 import Button from "@components/Button";
+import { SUPPORTED_CURRENCIES } from "@utils/constants";
+import Select from "@components/Select";
 import Card from "@components/Card";
 import { Form, useZodForm } from "@components/Form";
 import TierCard from "@components/TierCard";
@@ -52,6 +54,7 @@ const Tier = ({
 }: {
   index: number;
   field: tier;
+  isLoading?: boolean;
   fieldsData: Array<tier>;
   activeTier: number;
   onClick: (field: tier) => void;
@@ -60,6 +63,7 @@ const Tier = ({
     schema: object({
       amount: number().lt(100),
       comment: string(),
+      currency: string(),
       emoji: string(),
     }),
     defaultValues: field,
@@ -69,7 +73,12 @@ const Tier = ({
     control,
     formState: { errors },
   } = form;
-  const [comment, amount, emoji] = form.watch(["comment", "amount", "emoji"]);
+  const [comment, amount, currency, emoji] = form.watch([
+    "comment",
+    "amount",
+    "currency",
+    "emoji",
+  ]);
   console.log(errors, "submit");
 
   const [fields, setFields] = useState(fieldsData);
@@ -80,12 +89,12 @@ const Tier = ({
       // Items before the insertion point:
       ...fieldsData.slice(0, activeTier),
       // New item:
-      { comment, amount, emoji },
+      { comment, amount, currency, emoji },
       // Items after the insertion point:
       ...fieldsData.slice(activeTier + 1),
     ];
     setFields(newTiersData);
-  }, [comment, amount, emoji]);
+  }, [comment, amount, currency, emoji]);
 
   const handleContinue = () => {
     router.push(`/u/${currentProfile?.handle}`);
@@ -97,34 +106,59 @@ const Tier = ({
         <Form
           form={form}
           onSubmit={(formData) => {
-            onClick(formData);
+            console.log(formData, "strek");
+            // onClick(formData);
           }}
           className="items-center justify-between wm-2 z-10 my-auto xl:mt-18 w-full card border-theme  shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/500 flex"
         >
           <AppearAnimation className="flex-grow rounded-2xl  ring-1 ring-slate-900/5 w-full">
-            <Card className="p-3 pt-6">
-              <Input
-                type="number"
-                label="Balance"
-                placeholder="5 MATIC"
-                {...form.register(`amount`, {
-                  valueAsNumber: true,
-                  required: true,
-                })}
-              />
-              <Input
-                type="text"
-                label="Comment"
-                placeholder="Thanks for supporting with 5 MATIC"
-                {...form.register(`comment`)}
-              />
-              <Input
-                type="text"
-                label="Emoji"
-                placeholder="💰"
-                {...form.register(`emoji`)}
-              />
-              {/* <Button
+            <div className="magic-card !w-full">
+              <Card className=" bg-gray-900 w-full">
+                <div>
+                  <label className="label">
+                    <span className="label-text text-white">Currency</span>
+                  </label>
+                  <Select
+                    className="text-white"
+                    options={SUPPORTED_CURRENCIES.map(({ name, symbol }) => ({
+                      name,
+                      symbol,
+                      label: name,
+                    }))}
+                    onChange={(e) => {
+                      form.setValue("currency", e.symbol);
+                    }}
+                    defaultValue={
+                      SUPPORTED_CURRENCIES.map(({ name, symbol }) => ({
+                        name,
+                        symbol,
+                        label: name,
+                      }))[0]
+                    }
+                  />
+                </div>
+                <Input
+                  type="number"
+                  label="Amount"
+                  placeholder="5 MATIC"
+                  {...form.register(`amount`, {
+                    valueAsNumber: true,
+                    required: true,
+                  })}
+                />
+                <Input
+                  type="text"
+                  label="Comment"
+                  placeholder="Thanks for supporting with 5 MATIC"
+                  {...form.register(`comment`)}
+                />
+                <Input
+                  type="text"
+                  label="Emoji"
+                  placeholder="💰"
+                  {...form.register(`emoji`)}
+                />
+                {/* <Button
                 disabled={isLoading}
                 type="submit"
                 variant="primary"
@@ -132,30 +166,31 @@ const Tier = ({
               >
                 {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add more
               </Button> */}
-              <div className="flex">
-                <Button
-                  disabled={isLoading}
-                  type="submit"
-                  variant="primary"
-                  className="mx-auto mt-3 max-w-xs"
-                >
-                  {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add
-                  more
-                </Button>
-
-                {activeTier >= 2 ? (
+                <div className="flex">
                   <Button
+                    disabled={isLoading}
+                    type="submit"
                     variant="primary"
-                    onClick={handleContinue}
                     className="mx-auto mt-3 max-w-xs"
                   >
-                    continue
+                    {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add
+                    more
                   </Button>
-                ) : (
-                  <React.Fragment />
-                )}
-              </div>
-            </Card>
+
+                  {activeTier >= 2 ? (
+                    <Button
+                      variant="primary"
+                      onClick={handleContinue}
+                      className="mx-auto mt-3 max-w-xs"
+                    >
+                      continue
+                    </Button>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              </Card>
+            </div>
           </AppearAnimation>
         </Form>
       </div>
