@@ -306,3 +306,21 @@ div[data-lexical-editor="true"] {
 .lexical-editor h4 {
   @apply text-lg font-bold;
 }
+
+.brand-logo {
+  background-size: 100% 100%;
+  border-radius: 100%;
+  transition: 1s linear;
+  transform-style: preserve-3d;
+  animation: brand-spin 15s infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes brand-spin {
+  0% {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+  100% {
+    transform: rotate3d(2, 5, 2, 3600deg);
+  }
+}

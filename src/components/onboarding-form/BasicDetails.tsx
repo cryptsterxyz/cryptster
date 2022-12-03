@@ -65,6 +65,7 @@ const BasicDetails = ({
     },
   });
   const onCompleted = () => {
+    onComplete(1);
     toast.success("Profile updated successfully!");
   };
 
@@ -215,7 +216,6 @@ const BasicDetails = ({
             className="w-full items-center flex flex-col"
             onSubmit={({ name, bio }) => {
               // console.log("dsdfsdf");
-              onComplete(1);
               editProfile(name, bio);
             }}
           >
