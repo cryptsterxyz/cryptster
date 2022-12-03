@@ -197,4 +197,4 @@ function OnBoard() {
   );
 }
 
-export default withAuthenticatedRoute(withEditorContext(OnBoard));
+export default withAuthenticatedRoute(OnBoard);

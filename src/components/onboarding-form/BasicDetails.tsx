@@ -236,7 +236,11 @@ const BasicDetails = ({
               <label className="label">
                 <span className="label-text text-white">short bio</span>
               </label>{" "}
-              <Bio setEditorContent={setEditorContent} form={form} />
+              <Bio
+                initialState={form.getValues().bio}
+                setEditorContent={setEditorContent}
+                form={form}
+              />
             </div>
             <div className="m-auto pt-3">
               <Button
@@ -255,11 +259,19 @@ const BasicDetails = ({
 
         <div className="w-1/2 ring-1 rounded-md p-8 ml-4">
           <h2 className="text-white">Let People know what you do</h2>
-          <Editor
-            viewOnly
-            className=" lexical-about h-[500px]"
-            onChange={(e) => setEditorContent(e)}
-          />
+          {console.log()}
+          {form.getValues() && (
+            <Editor
+              initialState={
+                currentProfile?.attributes.filter(
+                  ({ key }) => key === "about"
+                )?.[0].value
+              }
+              viewOnly
+              className=" lexical-about h-[500px]"
+              onChange={(e) => setEditorContent(e)}
+            />
+          )}
         </div>
       </div>
     </AppearAnimation>

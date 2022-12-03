@@ -87,4 +87,4 @@ const Profile = () => {
   );
 };
 
-export default withAuthenticatedRoute(withEditorContext(Profile));
+export default withAuthenticatedRoute(Profile);

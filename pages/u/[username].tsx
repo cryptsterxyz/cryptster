@@ -16,27 +16,6 @@ import NotFound from "pages/404";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
-  useEffect(() => {
-    // document.documentElement.style.setProperty("--n", "219 14% 28%");
-    // document.documentElement.style.setProperty("--nc", "0 0% 100%");
-  }, []);
-  const [fields, setFields] = useState([
-    {
-      amount: 1,
-      comment: "",
-      emoji: "💰",
-    },
-    {
-      amount: 2,
-      comment: "",
-      emoji: "💰",
-    },
-    {
-      amount: 5,
-      comment: "",
-      emoji: "💰",
-    },
-  ]);
   const {
     query: { username, type },
   } = useRouter();
@@ -65,8 +44,8 @@ const Profile = () => {
   const profile = data?.profile;
   return (
     <div
-      data-theme="user"
-      className="w-full flex flex-grow px-4 sm:px-8 flex-col"
+      data-theme="bg-onboard"
+      className="bg-onboard text-white w-full flex flex-grow px-4 sm:px-8 flex-col"
     >
       <div className="relative sm:min-h-[300px]">
         <CoverPicture />
@@ -82,14 +61,13 @@ const Profile = () => {
       <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
         <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 border border-theme-user">
           <Editor
-            viewOnly
-            content="I love open source 💗
-I got into open source in 2012. Two years later, I quit my office job to work on open source full-time while living off savings. I have been doing that for more than 6 years now. Since 2018, my open source work has been funded by the awesome community.
-If you or your company use any of my projects or like what I’m doing, please consider backing me so I can continue maintaining and evolving all my projects and new ones. I'm in this for the long run.
-I actively maintain 1100+ npm packages (2 billion downloads a month) and many popular projects. You're probably depending on some of my packages in your dependency tree. For example, Webpack (proof) and Babel (proof) rely on 100+ of my packages. Many large companies also rely on my packages.
-You can read more about me in this interview and my AMA.
-Thank you for your support! 🙌"
-            className="min-h-[300px]"
+            isEditable={false}
+            className="h-full"
+            hidePlaceholder
+            initialState={
+              profile?.attributes?.filter(({ key }) => key === "about")?.[0]
+                .value
+            }
           />
         </Card>
         <TierCardData profile={profile} />
@@ -100,4 +78,4 @@ Thank you for your support! 🙌"
   );
 };
 
-export default withEditorContext(Profile);
+export default Profile;
