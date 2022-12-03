@@ -15,13 +15,15 @@ const Login: FC = () => {
             <div className="space-y-1">
               <div className="text-xl font-bold">Please sign the message.</div>
               <div className="text-sm text-gray-500">
-                {process.env.APP_NAME} uses this signature to verify that you&rsquo;re the
+                Cryptster uses this signature to verify that you&rsquo;re the
                 owner of this address.
               </div>
             </div>
           ) : (
             <div className="space-y-1">
-              <div className="text-xl font-bold text-gray-800">Connect your wallet.</div>
+              <div className="text-xl font-bold text-gray-800">
+                Connect your wallet.
+              </div>
               <div className="text-sm text-gray-800">
                 Connect with one of our available wallet providers or create a
                 new one.

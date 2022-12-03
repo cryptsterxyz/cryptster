@@ -1,12 +1,20 @@
-const ProfilePicture = () => (
-  <div className="h-[142px] w-[142px] bg-white rounded-full flex justify-center items-center"> 
-    <div className="max-h-[132px] max-w-[132px] rounded-full overflow-hidden">
-      <img
-        src="https://pbs.twimg.com/profile_images/1571516199468683264/me0oGiE4_400x400.jpg"
-        className=""
-      />
+import { useAppStore } from "@store/app";
+import getAvatar from "src/lib/getAvatar";
+
+const ProfilePicture = () => {
+  const currentProfile = useAppStore((state) => state.currentProfile);
+
+  return (
+    <div className="h-[142px] w-[142px] bg-white rounded-full flex justify-center items-center">
+      <div className="max-h-[132px] max-w-[132px] rounded-full overflow-hidden">
+        <img
+          src={getAvatar(currentProfile)}
+          loading="lazy"
+          alt={currentProfile?.handle}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default ProfilePicture;

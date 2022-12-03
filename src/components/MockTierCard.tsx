@@ -4,12 +4,14 @@ import Card from "./Card";
 import clsx from "clsx";
 import { XIcon } from "@heroicons/react/outline";
 import { tier } from "./onboarding-form/TierForm";
+import { SUPPORTED_CURRENCIES } from "@utils/constants";
 
 interface TierProps {
   tiers: Array<tier>;
   handle: string;
   activeTier?: number;
   viewOnly?: boolean;
+  currency: string;
 }
 
 const MockTierCard = ({
@@ -32,8 +34,13 @@ const MockTierCard = ({
         }
       )}
     >
-      <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl ">
-        Gift {handle} some crypto
+      <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl text-center">
+        Gift {handle} some crypto in{" "}
+        {
+          SUPPORTED_CURRENCIES.filter(
+            ({ address }) => tiers[currentTier]?.currency === address
+          )?.[0].name
+        }
       </h2>
       <p className="h-auto min-h-12 py-2 flex-grow-0">
         {tiers[currentTier]?.comment}

@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { XIcon } from "@heroicons/react/outline";
 import { tier } from "./onboarding-form/TierForm";
 import toast from "react-hot-toast";
-import { RELAY_ON, SIGN_WALLET, TESTNET_LENSHUB_PROXY } from "@utils/constants";
+import { RELAY_ON, SIGN_WALLET, SUPPORTED_CURRENCIES, TESTNET_LENSHUB_PROXY } from "@utils/constants";
 import { useAppStore } from "@store/app";
 import {
   CollectModules,
@@ -220,8 +220,13 @@ const TierCard = ({
         }
       )}
     >
-      <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl ">
-        Gift {handle} some crypto
+      <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl text-center">
+        Gift {handle}
+        {
+          SUPPORTED_CURRENCIES.filter(
+            ({ address }) => tiers[currentTier]?.currency === address
+          )?.[0]?.name
+        }
       </h2>
       <p className="h-auto min-h-12 py-2 flex-grow-0">
         {tiers[currentTier]?.comment}

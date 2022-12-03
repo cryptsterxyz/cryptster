@@ -7,7 +7,7 @@ const NavBar = () => (
       <img src="/logo.svg" className="w-8 h-8" />
       <p className="ml-2">Cryptster</p>
     </div>
-    <div className="navbar-end">
+    <div className="navbar-end mr-6">
       <MenuItems />
     </div>
   </div>

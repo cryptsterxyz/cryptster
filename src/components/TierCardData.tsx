@@ -74,9 +74,6 @@ const TierCardData: FC<Props> = ({
 
   const Tierattributes = data?.publications.items;
 
-  // const tiers = Tierattributes?.map(({ traitType, value }) => ({
-  //   [traitType]: value,
-  // }));
   const tiers = Tierattributes?.map((tier) => ({
     ...tier.metadata.attributes.reduce(
       (acc, { traitType, value }) => ({
@@ -86,6 +83,7 @@ const TierCardData: FC<Props> = ({
       {}
     ),
   }));
+  console.log(tiers);
   return (
     <TierCard
       handle="strek.lens"

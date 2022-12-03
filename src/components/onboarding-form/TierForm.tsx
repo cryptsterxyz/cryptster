@@ -135,7 +135,7 @@ const Tier = ({
                         label: name,
                       })
                     )}
-                    onChange={(e: { currency: string; }) => {
+                    onChange={(e: { currency: string }) => {
                       form.setValue("currency", e.currency);
                     }}
                     selected
@@ -199,6 +199,7 @@ const Tier = ({
         </Form>
       </div>
       <MockTierCard
+        currency={currency}
         activeTier={activeTier}
         tiers={fields}
         handle="strek.lens"
@@ -448,6 +449,13 @@ const TierForm = ({
         traitType: "amount",
         displayType: "string",
         value: amount,
+      },
+      {
+        traitType: "currency",
+        displayType: "string",
+        value: SUPPORTED_CURRENCIES.filter(
+          ({ address }) => address === currency
+        )?.[0].symbol,
       },
       {
         traitType: "is_cryptster_tier",

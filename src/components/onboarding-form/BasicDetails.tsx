@@ -66,7 +66,6 @@ const BasicDetails = ({
   });
   const onCompleted = () => {
     toast.success("Profile updated successfully!");
-    onComplete(1);
   };
 
   const {
@@ -161,7 +160,8 @@ const BasicDetails = ({
     const id = await uploadToArweave({
       name,
       bio,
-      cover_picture: null,
+      cover_picture:
+        "https://1.bp.blogspot.com/-CbWLumSsnHA/X3NCN8Y97SI/AAAAAAAAbdM/6_nItNbt0jcQvkFzogyKeqUGJjMyM57rACLcBGAsYHQ/s16000/v3-290920-rocket-minimalist-desktop-wallpaper-hd.png",
 
       // cover_picture: cover ? cover : null,
       attributes: [
@@ -215,6 +215,7 @@ const BasicDetails = ({
             className="w-full items-center flex flex-col"
             onSubmit={({ name, bio }) => {
               // console.log("dsdfsdf");
+              onComplete(1);
               editProfile(name, bio);
             }}
           >
@@ -258,7 +259,7 @@ const BasicDetails = ({
         </div>
 
         <div className="w-1/2 ring-1 rounded-md p-8 ml-4">
-          <h2 className="text-white">Let People know what you do</h2>
+          <h2 className="text-white">Let people know what you do</h2>
           {console.log()}
           {form.getValues() && (
             <Editor
