@@ -233,7 +233,7 @@ const BasicDetails = ({
               disabled
               {...form.register("handle")}
             />
-            <div className="w-[80%] mt-2">
+            <div className="form-control w-full max-w-md mx-auto">
               <label className="label">
                 <span className="label-text text-white">short bio</span>
               </label>{" "}
