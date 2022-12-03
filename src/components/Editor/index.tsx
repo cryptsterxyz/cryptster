@@ -21,21 +21,27 @@ import clsx from "clsx";
 const TRANSFORMERS = [...TEXT_FORMAT_TRANSFORMERS];
 
 const Editor = (
-  props: JSX.IntrinsicAttributes & HTMLAttributes<HTMLDivElement>
+  props: JSX.IntrinsicAttributes &
+    HTMLAttributes<HTMLDivElement> & { viewOnly?: boolean }
 ): JSX.Element => {
   // const setPublicationContent = usePublicationStore((state) => state.setPublicationContent);
-
+  const { viewOnly } = props;
   return (
     <div {...props} className={clsx("relative", props.className)}>
-      <ToolbarPlugin />
+      {viewOnly && <ToolbarPlugin />}
+
       <RichTextPlugin
         contentEditable={
           <ContentEditable className="px-5 block my-4 min-h-[65px] h-4/5 overflow-auto" />
         }
         placeholder={
-          <div className="px-5 absolute top-[65px] text-gray-400 pointer-events-none whitespace-nowrap">
-            What's happening?
-          </div>
+          !viewOnly ? (
+            <div className="px-5 absolute top-[65px] text-gray-400 pointer-events-none whitespace-nowrap">
+              What's happening?
+            </div>
+          ) : (
+            <div></div>
+          )
         }
         ErrorBoundary={() => <div>error</div>}
       />
@@ -43,6 +49,7 @@ const Editor = (
         onChange={(editorState) => {
           editorState.read(() => {
             const markdown = $convertToMarkdownString(TRANSFORMERS);
+            props?.onChange(markdown);
             // setPublicationContent(markdown);
           });
         }}

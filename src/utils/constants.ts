@@ -107,5 +107,6 @@ export const SUPPORTED_CURRENCIES = [
 ];
 
 export const IMGPROXY_URL = "https://media.lenster.xyz";
-export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-export const AVATAR = 'avatar';
+export const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
+export const AVATAR = "avatar";
+export const IPFS_GATEWAY = "https://lens.infura-ipfs.io/ipfs/";
