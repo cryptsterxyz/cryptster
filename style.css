@@ -223,6 +223,86 @@ div[data-lexical-editor="true"] {
 [data-theme="user"] .onboard-icon {
   @apply text-theme;
 }
-[data-theme="user"] .toolbar-icons button:hover .onboard-icon{ 
+[data-theme="user"] .toolbar-icons button:hover .onboard-icon {
   @apply text-white;
+}
+
+[data-theme="user"] .tier-card {
+  @apply ring-1 border-0 bg-slate-900/60;
+}
+
+.lexical-editor a {
+  @apply underline;
+}
+
+.PlaygroundEditorTheme__nestedListItem {
+  list-style-type: none;
+}
+.PlaygroundEditorTheme__nestedListItem:before,
+.PlaygroundEditorTheme__nestedListItem:after {
+  display: none;
+}
+
+.PlaygroundEditorTheme__ol1 {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+  list-style-position: inside;
+}
+.PlaygroundEditorTheme__ol2 {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+  list-style-type: upper-alpha;
+  list-style-position: inside;
+}
+.PlaygroundEditorTheme__ol3 {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+  list-style-type: lower-alpha;
+  list-style-position: inside;
+}
+.PlaygroundEditorTheme__ol4 {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+  list-style-type: upper-roman;
+  list-style-position: inside;
+}
+.PlaygroundEditorTheme__ol5 {
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+  list-style-type: lower-roman;
+  list-style-position: inside;
+}
+
+.PlaygroundEditorTheme__listItem {
+  margin: 0 32px;
+}
+
+.lexical-editor ul li::before {
+  content: "\2022";
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.lexical-editor h1 {
+  @apply text-3xl font-bold;
+}
+
+.lexical-editor h2 {
+  @apply text-2xl font-bold;
+}
+
+.lexical-editor h3 {
+  @apply text-xl font-bold;
+}
+
+.lexical-editor h4 {
+  @apply text-lg font-bold;
 }

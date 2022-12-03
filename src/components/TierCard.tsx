@@ -91,12 +91,6 @@ const TierCard = ({
     },
   });
 
-  console.log(
-    "tiers",
-    tiers,
-    publications ? publications[currentTier]?.id : "0"
-  );
-
   const collectModule: any = data?.publication?.collectModule;
   const [createCollectTypedData, { loading: typedDataLoading }] =
     useCreateCollectTypedDataMutation({
@@ -217,8 +211,8 @@ const TierCard = ({
   return (
     <Card
       className={clsx(
-        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 
-        card border-theme  shadow-lg shadow-slate-900/5 ring-slate-900/500 flex flex-col justify-center items-center
+        `m-2 z-10 py-5 my-auto xl:mt-18 w-full lg:w-2/5 tier-card
+        card shadow-lg shadow-slate-900/5 ring-slate-900/500 flex flex-col justify-center items-center
         `,
         {
           "bg-slate-900 text-white bg-gray-900/50 ring-1": viewOnly,
@@ -241,7 +235,6 @@ const TierCard = ({
           <div className="flex flex-wrap">
             {tiers.map(({ amount, steps }, _index) => (
               <button
-                key={steps}
                 onClick={() => {
                   !viewOnly && setCurrentTier(_index);
                 }}
@@ -251,7 +244,7 @@ const TierCard = ({
                     : "border border-theme bg-white text-gray-800",
                   "m-1 sm:m-2 h-10 w-10 rounded-full flex justify-center items-center"
                 )}
-                key={amount}
+                key={"tier" + _index}
               >
                 <span>{amount}</span>
               </button>

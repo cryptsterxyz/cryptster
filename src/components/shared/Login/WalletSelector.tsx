@@ -33,7 +33,6 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
   const { mounted } = useIsMounted();
   const { chain } = useNetwork();
   const { connectors, error, connectAsync } = useConnect();
-  console.log("connectttt", connectors, error, connectAsync);
   const { address, connector: activeConnector } = useAccount();
   const { signMessageAsync } = useSignMessage({ onError });
   const [loadChallenge, { error: errorChallenge }] = useChallengeLazyQuery({
@@ -46,7 +45,6 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
   const onConnect = async (connector: Connector) => {
     try {
       const account = await connectAsync({ connector });
-      console.log("connecttttttt", account);
       if (account) {
         setHasConnected(true);
       }
@@ -87,7 +85,6 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
         variables: { ownedBy: address },
       });
 
-      console.log("connecttttttttttt", profilesData);
       if (profilesData?.profiles?.items?.length === 0) {
         setHasProfile(false);
       } else {

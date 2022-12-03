@@ -61,7 +61,7 @@ const Profile = () => {
 
   return (
     <div
-      data-theme="bg-onboard"
+      data-theme="user"
       className="bg-onboard text-white w-full flex flex-grow px-4 sm:px-8 flex-col"
     >
       {party ? (
@@ -86,23 +86,23 @@ const Profile = () => {
         {profile.name}
       </div>
       <div className=" font-space-grotesek font-medium mt-3">{profile.bio}</div>
-      <div className="border-b border-b-theme mt-5"></div>
+      <div className="ring-1 mt-5"></div>
       <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
-        <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 border border-theme-user">
+        <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 ring-1 bg-slate-900/60">
           <Editor
             isEditable={false}
             className="h-full"
             hidePlaceholder
             initialState={
               profile?.attributes?.filter(({ key }) => key === "about")?.[0]
-                .value
+                ?.value
             }
           />
         </Card>
         <TierCardData profile={profile} setParty={setParty} party={party} />
         {/* <TierCard handle="strek.lens" tiers={fields} viewOnly={false} /> */}
       </div>
-      <div className="m-11 "></div>
+      <div className="m-2"></div>
     </div>
   );
 };

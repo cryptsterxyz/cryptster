@@ -1,7 +1,12 @@
 import {
   $convertToMarkdownString,
+  ELEMENT_TRANSFORMERS,
   TEXT_FORMAT_TRANSFORMERS,
 } from "@lexical/markdown";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+
+import { TRANSFORMERS } from "@lexical/markdown";
+import { ListItemNode, ListNode } from "@lexical/list";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HashtagPlugin } from "@lexical/react/LexicalHashtagPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
@@ -24,15 +29,15 @@ import { AutoLinkNode, LinkNode } from "@lexical/link";
 import { $convertFromMarkdownString } from "@lexical/markdown";
 import { EmojiNode } from "./nodes/EmojiNode";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-
-const TRANSFORMERS = [...TEXT_FORMAT_TRANSFORMERS];
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import ListMaxIndentLevelPlugin from "./ListMaxIndexLevelPlugin";
 
 const Editor = (props: {
   viewOnly?: boolean;
   isEditable?: boolean;
   hidePlaceholder?: boolean;
   initialState?: string;
-}): JSX.Element => {
+}) => {
   const initialConfig = {
     namespace: "composer",
     editable: props.isEditable ?? true,
@@ -44,8 +49,32 @@ const Editor = (props: {
       },
       link: "text-brand",
       hashtag: "text-brand",
+      list: {
+        listitem: "PlaygroundEditorTheme__listItem",
+        nested: {
+          listitem: "PlaygroundEditorTheme__nestedListItem",
+        },
+        olDepth: [
+          "PlaygroundEditorTheme__ol1",
+          "PlaygroundEditorTheme__ol2",
+          "PlaygroundEditorTheme__ol3",
+          "PlaygroundEditorTheme__ol4",
+          "PlaygroundEditorTheme__ol5",
+        ],
+        ul: "PlaygroundEditorTheme__ul",
+      },
     },
-    nodes: [CodeNode, HashtagNode, AutoLinkNode, LinkNode, EmojiNode],
+    nodes: [
+      HeadingNode,
+      ListNode,
+      ListItemNode,
+      QuoteNode,
+      CodeNode,
+      HashtagNode,
+      AutoLinkNode,
+      LinkNode,
+      EmojiNode,
+    ],
     editorState: () =>
       $convertFromMarkdownString(props?.initialState || "", TRANSFORMERS),
     onError: (error: any) => {
@@ -56,7 +85,13 @@ const Editor = (props: {
   const { viewOnly } = props;
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div {...props} className={clsx("relative", props.className)}>
+      <div
+        {...props}
+        className={clsx("relative lexical-editor", props.className)}
+      >
+        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+        {/* <ListPlugin /> */}
+
         {viewOnly && <ToolbarPlugin />}
 
         <RichTextPlugin
@@ -90,8 +125,7 @@ const Editor = (props: {
         <EmojiPickerPlugin />
         <HistoryPlugin />
         <HashtagPlugin />
-        {/* <MentionsPlugin /> */}
-        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+        <ListMaxIndentLevelPlugin maxDepth={2} />
       </div>
     </LexicalComposer>
   );
