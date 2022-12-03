@@ -15,7 +15,7 @@ import withAuthenticatedRoute from "src/utils/withAuthenticatedRoute";
 function OnBoard() {
   const currentProfile = useAppStore((state) => state.currentProfile);
 
-  const [steps, setSteps] = useState(1);
+  const [steps, setSteps] = useState(0);
   return (
     <div className="flex flex-grow  bg-onboard">
       <div className="flex justify-center items-center flex-col flex-grow bg-onboard-overlay">
