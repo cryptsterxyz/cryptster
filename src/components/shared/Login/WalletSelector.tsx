@@ -12,12 +12,11 @@ import {
 } from "../../../../generated";
 import type { Dispatch, FC } from "react";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { CHAIN_ID } from "../../../utils/constants";
 import { useAppPersistStore, useAppStore } from "../../../store/app";
 import type { Connector } from "wagmi";
 import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
-import { Spinner } from "@components/icons/Spinner";
 
 interface Props {
   setHasConnected: Dispatch<boolean>;
@@ -110,8 +109,6 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
     }
   };
 
-  console.log("connectttttttttttprofiless", profiles);
-
   return activeConnector?.id ? (
     <div className="space-y-3">
       {chain?.id === CHAIN_ID ? (
@@ -119,7 +116,7 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
           disabled={loading}
           icon={
             loading ? (
-              <Spinner className="mr-2" size="xs" />
+              <LoaderIcon className="mr-2"/>
             ) : (
               <img
                 className="mr-2 w-4 h-4"

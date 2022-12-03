@@ -38,18 +38,18 @@ const ToolbarPlugin: FC = () => {
   }, [editor, updateToolbar]);
 
   return (
-    <div className="w-full px-5 py-2 flex toolbar-icons border-b space-x-1">
+    <div className="w-full px-5 py-2 flex toolbar-icons border-b-theme border-b space-x-1">
       <button
-        className={isBold ? 'bg-brand-100' : ''}
+        className={isBold ? 'bg-theme-darker' : ''}
         title="Bold"
         onClick={() => {
           activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
         }}
       >
-        <i className="toolbar-icon bold text-brand-500" />
+        <i className="toolbar-icon bold text-theme" />
       </button>
       <button
-        className={isItalic ? 'bg-brand-100' : ''}
+        className={isItalic ? 'bg-theme-darker' : ''}
         title="Italic"
         onClick={() => {
           activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
@@ -58,7 +58,7 @@ const ToolbarPlugin: FC = () => {
         <i className="toolbar-icon italic" />
       </button>
       <button
-        className={isCode ? 'bg-brand-100' : ''}
+        className={isCode ? 'bg-theme-darker' : ''}
         title="Code"
         onClick={() => {
           activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');

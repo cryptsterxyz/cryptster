@@ -12,6 +12,7 @@ import { useAppPersistStore, useAppStore } from "../store/app";
 import { useAccount, useDisconnect, useNetwork } from "wagmi";
 import useIsMounted from "../utils/hooks/useIsMounted";
 import Navbar from "@components/NavBar";
+import PageLoader from "./PageLoader";
 
 interface Props {
   children: ReactNode;
@@ -85,7 +86,11 @@ const Layout: FC<Props> = ({ children }) => {
   }, [isDisconnected, address, chain, disconnect, profileId]);
 
   if (loading || !mounted) {
-    return <p>loading n not mounted</p>;
+    return (
+      <div className="h-screen flex">
+        <PageLoader />
+      </div>
+    );
   }
 
   return (

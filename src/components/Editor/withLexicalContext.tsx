@@ -3,6 +3,7 @@ import { HashtagNode } from '@lexical/hashtag';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import type { FC } from 'react';
+import { EmojiNode } from './nodes/EmojiNode';
 
 
 const initialConfig = {
@@ -16,7 +17,7 @@ const initialConfig = {
     link: 'text-brand',
     hashtag: 'text-brand'
   },
-  nodes: [CodeNode, HashtagNode, AutoLinkNode, LinkNode],
+  nodes: [CodeNode, HashtagNode, AutoLinkNode, LinkNode, EmojiNode],
   editorState: null,
   onError: (error: any) => {
     console.error(error);
