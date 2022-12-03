@@ -226,7 +226,8 @@ const TierCard = ({
       )}
     >
       <h2 className="h-auto font-bold text-xl flex-grow-0 sm:text-2xl text-center">
-        Gift {handle} some crypto in {tiers[currentTier]?.currency}
+        Collect tier to support {currentProfile.handle} in
+        {tiers[currentTier]?.currency}
       </h2>
       <p className="h-auto min-h-12 py-2 flex-grow-0">
         {tiers[currentTier]?.comment}

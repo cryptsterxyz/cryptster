@@ -184,9 +184,13 @@ const Tier = ({
                   {activeTier >= 2 ? (
                     <Button
                       variant="primary"
-                      onClick={handleContinue}
+                      onClick={() => {
+                        onClick(form.getValues());
+                        handleContinue()
+                      }}
                       className="mx-auto mt-3 max-w-xs"
                     >
+                      {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
                       continue
                     </Button>
                   ) : (
@@ -213,7 +217,7 @@ const TierForm = ({
 }: {
   onComplete: Dispatch<SetStateAction<number>>;
 }) => {
-  const [activeTier, setActiveTier] = useState(0);
+  const [activeTier, setActiveTier] = useState(2);
 
   const [fields, setFields] = useState([
     {

@@ -78,19 +78,22 @@ const Profile = () => {
       ) : null}
       <div className="relative sm:min-h-[300px]">
         <CoverPicture />
-        <div className="absolute -bottom-8 left-1/4 sm:left-6 z-10">
+        <div className="absolute -bottom-8 left-2/4 -translate-x-[50px] z-10">
           <ProfilePicture />
         </div>
       </div>
-      <div className=" font-space-grotesek font-bold text-4xl mt-10">
-        {profile.name}
+      <div className="mx-auto text-center">
+        <div className=" font-space-grotesek font-bold text-4xl mt-10">
+          {profile.name}
+        </div>
+        <div className=" font-space-grotesek font-semibold text-lg mt-2">
+          @{profile.handle}
+        </div>
+        <div className=" font-space-grotesek font-medium mt-3">
+          {profile.bio}
+        </div>
       </div>
-      <div className=" font-space-grotesek font-semibold text-lg mt-2">
-        @{profile.handle}
-      </div>
-      <div className=" font-space-grotesek font-medium mt-3">{profile.bio}</div>
-      <div className="ring-1 mt-5"></div>
-      <div className="flex mt-7 lg:flex-nowrap flex-wrap-reverse">
+      <div className="flex lg:flex-nowrap flex-wrap-reverse w-[80%] mt-5 mx-auto">
         <Card className="mt-6 m-2 lg:m-0 w-full lg:w-3/5 ring-1 bg-slate-900/60">
           <Editor
             isEditable={false}
