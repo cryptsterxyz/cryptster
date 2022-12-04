@@ -178,7 +178,7 @@ const Tier = ({
                     className="mx-auto mt-3 max-w-xs"
                   >
                     {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />} add
-                    more
+                    more new tiers
                   </Button>
 
                   {activeTier >= 2 ? (
@@ -191,7 +191,7 @@ const Tier = ({
                       className="mx-auto mt-3 max-w-xs"
                     >
                       {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
-                      continue
+                      continue to with existing tiers
                     </Button>
                   ) : (
                     <React.Fragment />

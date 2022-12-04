@@ -17,6 +17,7 @@ import { CHAIN_ID } from "../../../utils/constants";
 import { useAppPersistStore, useAppStore } from "../../../store/app";
 import type { Connector } from "wagmi";
 import { useAccount, useConnect, useNetwork, useSignMessage } from "wagmi";
+import { Router, useRouter } from "next/router";
 
 interface Props {
   setHasConnected: Dispatch<boolean>;
@@ -41,7 +42,7 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
   const [authenticate, { error: errorAuthenticate }] =
     useAuthenticateMutation();
   const [getProfiles, { error: errorProfiles }] = useUserProfilesLazyQuery();
-
+  const router = useRouter();
   const onConnect = async (connector: Connector) => {
     try {
       const account = await connectAsync({ connector });
@@ -102,6 +103,7 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
     } catch (error) {
       console.error(error);
     } finally {
+      router.push("/onboard");
       setLoading(false);
     }
   };
@@ -113,7 +115,7 @@ const WalletSelector: FC<Props> = ({ setHasConnected, setHasProfile }) => {
           disabled={loading}
           icon={
             loading ? (
-              <LoaderIcon className="mr-2"/>
+              <LoaderIcon className="mr-2" />
             ) : (
               <img
                 className="mr-2 w-4 h-4"

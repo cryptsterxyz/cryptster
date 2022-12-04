@@ -251,7 +251,7 @@ const BasicDetails = ({
                 className="mx-auto mt-3 max-w-xs"
               >
                 {isLoading && <LoaderIcon className="mr-2 h-4 w-4" />}
-                continue
+                continue to add tier details
               </Button>
               {txHash ? <IndexStatus txHash={txHash} /> : null}
             </div>
