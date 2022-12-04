@@ -44,6 +44,7 @@ export type tier = {
   comment: string;
   currency: string;
   emoji: string;
+  setClickedOnContinue?: any;
 };
 
 const Tier = ({
@@ -53,10 +54,12 @@ const Tier = ({
   isLoading = false,
   fieldsData,
   onClick,
+  setClickedOnContinue,
   activeTier,
 }: {
   index: number;
   field: tier;
+  setClickedOnContinue: any;
   setTiersFields: Dispatch<
     SetStateAction<
       { amount: number; comment: string; currency: string; emoji: string }[]
@@ -104,9 +107,9 @@ const Tier = ({
     setTiersFields(newTiersData);
   }, [comment, amount, currency, emoji]);
 
-  const handleContinue = () => {
-    router.push(`/u/${currentProfile?.handle}`);
-  };
+  // const handleContinue = () => {
+  //   router.push(`/u/${currentProfile?.handle}`);
+  // };
 
   return (
     <div className="flex justify-between">
@@ -185,8 +188,8 @@ const Tier = ({
                     <Button
                       variant="primary"
                       onClick={() => {
+                        setClickedOnContinue(true);
                         onClick(form.getValues());
-                        handleContinue();
                       }}
                       className="mx-auto mt-3 max-w-xs"
                     >
@@ -274,10 +277,14 @@ const TierForm = ({
   const txnQueue = useTransactionPersistStore((state) => state.txnQueue);
   const setTxnQueue = useTransactionPersistStore((state) => state.setTxnQueue);
 
+  const [clickedOnContinue, setClickedOnContinue] = React.useState(false);
   const onCompleted = () => {
     setActiveTier((currentTier) => currentTier + 1);
     setPublicationContent("");
     resetCollectSettings();
+    if (clickedOnContinue && activeTier >= 2) {
+      router.push(`/u/${currentProfile?.handle}`);
+    }
   };
 
   const generateOptimisticPost = ({
@@ -539,6 +546,7 @@ const TierForm = ({
             fieldsData={fields}
             field={field}
             onClick={createPost}
+            setClickedOnContinue={setClickedOnContinue}
           />
         ))}
         activeIndex={activeTier}
