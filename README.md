@@ -4,6 +4,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
+add BUNDLR_PRIVATE_KEY, and 
+```
+NEXT_PUBLIC_SERVERLESS_URL="http://localhost:3002/api/metadata/upload"
+APP_NAME="cryptster"
+```
+to .env
+
 ```bash
 npm run dev
 # or
